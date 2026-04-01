@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | Sistema de Bibliotecas UNDAC</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
+</head>
+
+<body>
+    <!-- Top Institutional Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-links">
+                <a href="https://undac.edu.pe/" target="_blank"><i class="fas fa-university"></i> UNDAC Principal</a>
+                <a href="http://repositorio.undac.edu.pe/" target="_blank"><i class="fas fa-archive"></i> Repositorio
+                    UNDAC</a>
+                <a href="https://extranet.undac.edu.pe/" target="_blank"><i class="fas fa-user-graduate"></i>
+                    Extranet</a>
+                <a href="https://digital.undac.edu.pe/" target="_blank"><i class="fas fa-file-signature"></i>
+                    UNDAC-SGDFD</a>
+                <a href="https://elibro.net/es/lc/undac/login_usuario/" target="_blank"><i class="fas fa-laptop"></i>
+                    Biblioteca Virtual (eLibro)</a>
+                <a href="https://pagalo.pe/" target="_blank" class="pagalo-link"><i class="fas fa-credit-card"></i>
+                    Págalo.pe</a>
+            </div>
+            <div class="top-bar-social">
+                <a href="https://www.facebook.com/undacrrpp/?locale=es_LA" target="_blank" title="Facebook UNDAC"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/Bibliotecaundac/?locale=es_LA" target="_blank"
+                    title="Facebook Biblioteca"><i class="fab fa-facebook-square"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="navbar has-top-bar">
+        <div class="container navbar-container">
+            <div class="logo">
+                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                    <h2>Biblioteca <span>UNDAC</span></h2>
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="/">Inicio</a>
+                <a href="/catalogo.html">Catálogo</a>
+                <a href="http://repositorio.undac.edu.pe/" target="_blank">Repositorio</a>
+                <a href="/videoteca.html">Videoteca</a>
+                <a href="/servicios.html">Servicios</a>
+                <a href="/reglamento.html">Reglamento</a>
+                <a href="/nosotros.html">Nosotros</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="admin-login.html" class="btn btn-outline">Intranet</a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Catálogo en Línea</h1>
+            <p>Encuentra y reserva libros físicos, revistas, tesis y material de investigación disponible en el campus.
+            </p>
+        </div>
+    </section>
+
+    <!-- Catalog Content -->
+    <section class="catalog-section">
+        <div class="container catalog-container">
+
+            <!-- Sidebar / Filters -->
+            <aside class="sidebar" data-aos="fade-right">
+                <div class="filter-box">
+                    <h3>Búsqueda</h3>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Palabra clave..."
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); outline: none;">
+                    </div>
+                    <button class="btn btn-primary w-full" style="padding: 0.5rem;">Buscar</button>
+                </div>
+
+                <div class="filter-box">
+                    <h3>Filtrar Por Categoria</h3>
+                    <ul>
+                        <li><label><input type="checkbox"> Ciencias de la Salud (150)</label></li>
+                        <li><label><input type="checkbox"> Ingeniería (320)</label></li>
+                        <li><label><input type="checkbox"> Letras y Humanidades (85)</label></li>
+                        <li><label><input type="checkbox"> Economía y Negocios (210)</label></li>
+                        <li><label><input type="checkbox"> Computación e Informática (180)</label></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Book Grid -->
+            <div class="catalog-main" data-aos="fade-left">
+                <div class="catalog-header-actions">
+                    <p>Mostrando <strong>1-12</strong> de 945 resultados</p>
+                    <select
+                        style="padding: 0.5rem; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); outline: none;">
+                        <option>Ordenar por: Relevancia</option>
+                        <option>Ordenar por: Más recientes</option>
+                        <option>Ordenar por: Título (A-Z)</option>
+                    </select>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 3rem;">
+    
+                    {% for libro in libros %}
+                    <div class="book-card" data-aos="fade-up">
+                        <a href="/libro-detalle.html/{{ libro.ID_Libro }}" style="display: block; position: relative;">
+                            <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' }}" alt="Portada de {{ libro.Titulo }}">
+                            
+                            {% if libro.Copias_Disponibles > 0 %}
+                                <span class="book-badge-disponible">Disponible ({{ libro.Copias_Disponibles }})</span>
+                            {% else %}
+                                <span class="book-badge-prestado">Agotado</span>
+                            {% endif %}
+                        </a>
+                        <div class="book-card-content">
+                            <p class="book-card-category">{{ libro.categoria.Nombre_Categoria if libro.categoria else 'General' }}</p>
+                            <h3 class="book-card-title"><a href="/libro-detalle.html/{{ libro.ID_Libro }}">{{ libro.Titulo }}</a></h3>
+                            <p class="book-card-author">{{ libro.Autor }}</p>
+                            <a href="/libro-detalle.html/{{ libro.ID_Libro }}" class="btn btn-outline w-full" style="padding: 0.5rem;">Ver Detalles</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div style="grid-column: span 3; text-align: center; padding: 2rem;">
+                        <p>No hay libros registrados en el catálogo aún.</p>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="page-btn"><i class="fas fa-chevron-left"></i></a>
+                    <a href="#" class="page-btn active">1</a>
+                    <a href="#" class="page-btn">2</a>
+                    <a href="#" class="page-btn">3</a>
+                    <span style="display: inline-flex; align-items: center; padding: 0 0.5rem;">...</span>
+                    <a href="#" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-4 footer-top">
+                <div class="footer-col">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                        <h2 class="footer-logo" style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
+                    </div>
+                    <p>Sistema de Bibliotecas de la Universidad Nacional Daniel Alcides Carrión. Fomentando la
+                        investigación y el conocimiento.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Útiles</h3>
+                    <ul>
+                        <li><a href="#">Búsqueda Avanzada</a></li>
+                        <li><a href="#">Guías Temáticas</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Reglamento de Biblioteca</a></li>
+                        <li><a href="#">Buzón de Sugerencias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Sede Central: Pasco, Perú</li>
+                        <li><i class="fas fa-envelope"></i> biblioteca@undac.edu.pe</li>
+                        <li><i class="fas fa-phone-alt"></i> +51 (063) 123456</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Horario de Atención</h3>
+                    <p>Lunes a Viernes:<br>8:00 am - 8:00 pm</p>
+                    <p>Sábados:<br>8:00 am - 1:00 pm</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Universidad Nacional Daniel Alcides Carrión. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Políticas de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="../static/js/main.js"></script>
+</body>
+
+</html>

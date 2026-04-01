@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Sistema de Bibliotecas UNDAC</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper CSS (Carrusel) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
+</head>
+
+<body>
+    <!-- Top Institutional Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-links">
+                <a href="https://undac.edu.pe/" target="_blank"><i class="fas fa-university"></i> UNDAC Principal</a>
+                <a href="http://repositorio.undac.edu.pe/" target="_blank"><i class="fas fa-archive"></i> Repositorio
+                    UNDAC</a>
+                <a href="https://extranet.undac.edu.pe/" target="_blank"><i class="fas fa-user-graduate"></i>
+                    Extranet</a>
+                <a href="https://digital.undac.edu.pe/" target="_blank"><i class="fas fa-file-signature"></i>
+                    UNDAC-SGDFD</a>
+                <a href="https://elibro.net/es/lc/undac/login_usuario/" target="_blank"><i class="fas fa-laptop"></i>
+                    Biblioteca Virtual (eLibro)</a>
+                <a href="https://pagalo.pe/" target="_blank" class="pagalo-link"><i class="fas fa-credit-card"></i>
+                    Págalo.pe</a>
+            </div>
+            <div class="top-bar-social">
+                <a href="https://www.facebook.com/undacrrpp/?locale=es_LA" target="_blank" title="Facebook UNDAC"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/Bibliotecaundac/?locale=es_LA" target="_blank"
+                    title="Facebook Biblioteca"><i class="fab fa-facebook-square"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="navbar has-top-bar">
+        <div class="container navbar-container">
+            <div class="logo">
+                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                    <h2>Biblioteca <span>UNDAC</span></h2>
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="/">Inicio</a>
+                <a href="/catalogo.html">Catálogo</a>
+                <a href="http://repositorio.undac.edu.pe/" target="_blank">Repositorio</a>
+                <a href="/videoteca.html">Videoteca</a>
+                <a href="/servicios.html">Servicios</a>
+                <a href="/reglamento.html">Reglamento</a>
+                <a href="/nosotros.html">Nosotros</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="admin-login.html" class="btn btn-outline">Intranet</a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-4 footer-top">
+                <div class="footer-col">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                        <h2 class="footer-logo" style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
+                    </div>
+                    <p>Sistema de Bibliotecas de la Universidad Nacional Daniel Alcides Carrión. Fomentando la
+                        investigación y el conocimiento.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Útiles</h3>
+                    <ul>
+                        <li><a href="#">Búsqueda Avanzada</a></li>
+                        <li><a href="#">Guías Temáticas</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Reglamento de Biblioteca</a></li>
+                        <li><a href="#">Buzón de Sugerencias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Sede Central: Pasco, Perú</li>
+                        <li><i class="fas fa-envelope"></i> biblioteca@undac.edu.pe</li>
+                        <li><i class="fas fa-phone-alt"></i> +51 (063) 123456</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Horario de Atención</h3>
+                    <p>Lunes a Viernes:<br>8:00 am - 8:00 pm</p>
+                    <p>Sábados:<br>8:00 am - 1:00 pm</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Universidad Nacional Daniel Alcides Carrión. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Políticas de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../static/js/main.js"></script>
+    <script>
+        // Inicializar animaciones
+        AOS.init({ duration: 800, once: true });
+    </script>
+
+    <style>
+        /* Estilos del Chatbot */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px; /* Esquina inferior izquierda como pediste */
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            z-index: 9999;
+            transition: var(--transition);
+        }
+        .chatbot-btn:hover { transform: scale(1.1); background-color: var(--secondary); color: var(--dark); }
+        
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 350px;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 9999;
+            display: none; /* Oculto por defecto */
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+        .chatbot-window.active { display: flex; animation: fadeUp 0.3s ease-out; }
+        
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .close-chat { cursor: pointer; color: white; border: none; background: transparent; font-size: 1.2rem; }
+        
+        .chat-body {
+            height: 350px;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #F8FAFC;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Mensajes */
+        .msg-bot { background: white; padding: 0.75rem; border-radius: 10px 10px 10px 0; border: 1px solid var(--gray-200); color: var(--text-main); font-size: 0.9rem; width: 85%; align-self: flex-start; }
+        .msg-user { background: var(--primary); color: white; padding: 0.75rem; border-radius: 10px 10px 0 10px; font-size: 0.9rem; width: fit-content; max-width: 85%; align-self: flex-end; }
+        
+        /* Botones de Opciones */
+        .chat-options { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+        .chat-option-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: left;
+            transition: var(--transition);
+        }
+        .chat-option-btn:hover { background: var(--primary); color: white; }
+        
+        /* Enlace a PDF */
+        .pdf-download-btn {
+            display: inline-block;
+            margin-top: 0.5rem;
+            background: #EF4444; /* Rojo PDF */
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .pdf-download-btn:hover { color: white; background: #DC2626; }
+    </style>
+
+    <div class="chatbot-btn" id="chatbotToggle" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chat-header">
+            <span><i class="fas fa-robot"></i> Asistente DIUNSIBI</span>
+            <button class="close-chat" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="msg-bot">
+                ¡Hola! Soy el asistente virtual de la biblioteca UNDAC. Haz clic en una de las opciones para ayudarte:
+                <div class="chat-options" id="initial-options">
+                    <button class="chat-option-btn" onclick="sendOption('requisitos', 'Requisitos para Repositorio')">Requisitos para Repositorio</button>
+                    <button class="chat-option-btn" onclick="sendOption('autorizacion', 'Formato de Autorización')">Formato de Autorización</button>
+                    <button class="chat-option-btn" onclick="sendOption('horario', 'Horarios de Atención')">Horarios de Atención</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatWindow.classList.toggle('active');
+        }
+
+        function sendOption(optionType, optionText) {
+            const chatBody = document.getElementById('chatBody');
+            
+            // 1. Mostrar lo que el usuario seleccionó
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg-user';
+            userMsg.innerText = optionText;
+            chatBody.appendChild(userMsg);
+
+            // Hacer scroll hacia abajo
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // 2. Simular tiempo de respuesta (Medio segundo)
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg-bot';
+
+                // 3. Respuestas basadas en tus PDFs
+                if (optionType === 'requisitos') {
+                    botMsg.innerHTML = `
+                        Para publicar tu trabajo en el repositorio debes enviar al correo <strong>repositorio@undac.edu.pe</strong> los siguientes documentos en formato digital: <br><br>
+                        • Informe y Reporte de similitud (Turnitin).<br>
+                        • Acta de sustentación en PDF.<br>
+                        • Copia de DNI a colores.<br>
+                        • Archivo en Word y PDF.<br><br>
+                        <em>Evite fotografiar sus documentos.</em>
+                        <br>
+                        <a href="../static/uploads/pdfs/requisitos_repositorio.pdf" target="_blank" class="pdf-download-btn"><i class="fas fa-file-pdf"></i> Ver PDF de Requisitos</a>
+                    `;
+                } 
+                else if (optionType === 'autorizacion') {
+                    botMsg.innerHTML = `
+                        Necesitas llenar la <strong>Autorización para Publicación de Trabajos de Investigación</strong> para el Repositorio Institucional. <br><br>
+                        Este documento debe ser rellenado a computadora y firmado. Debes indicar si será de acceso público o restringido.
+                        <br>
+                        <a href="../static/uploads/pdfs/autorizacion_pregrado.pdf" target="_blank" class="pdf-download-btn"><i class="fas fa-file-pdf"></i> Descargar Formato Editable</a>
+                    `;
+                }
+                else if (optionType === 'horario') {
+                    botMsg.innerHTML = `Nuestro horario de atención en la Biblioteca Central es de Lunes a Viernes de 7:30 a 21:00 horas. <br><br> ¿Te puedo ayudar con algo más?`;
+                }
+
+                chatBody.appendChild(botMsg);
+                
+                // Mostrar nuevamente las opciones iniciales
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'chat-options';
+                optionsDiv.innerHTML = `
+                    <button class="chat-option-btn" onclick="sendOption('requisitos', 'Requisitos para Repositorio')">Requisitos para Repositorio</button>
+                    <button class="chat-option-btn" onclick="sendOption('autorizacion', 'Formato de Autorización')">Formato de Autorización</button>
+                `;
+                botMsg.appendChild(optionsDiv);
+
+                // Hacer scroll hacia abajo
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>
+
+</html>

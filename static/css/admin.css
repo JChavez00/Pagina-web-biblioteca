@@ -1,0 +1,494 @@
+/* =========================================
+   ADMIN PANEL STYLES
+   ========================================= */
+
+body.admin-body {
+    background-color: var(--gray-100);
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Admin */
+.admin-sidebar {
+    width: 260px;
+    background-color: var(--dark);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-logo {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-logo h2 {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.admin-logo span {
+    color: var(--secondary);
+}
+
+.admin-logo-desc {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+.admin-nav {
+    flex: 1;
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-nav a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    color: var(--gray-200);
+    transition: var(--transition);
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--secondary);
+    border-left: 4px solid var(--secondary);
+}
+
+.admin-nav a i {
+    width: 20px;
+    text-align: center;
+}
+
+.admin-user {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+.user-info p {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.user-info a {
+    color: var(--gray-500);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+/* Main Content Admin */
+.admin-main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 2rem;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.admin-header-title h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.admin-header-title p {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+/* Stat Cards */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 4px solid var(--primary);
+}
+
+.stat-info h4 {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stat-info p {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(30, 58, 138, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.stat-card.stat-success {
+    border-left-color: #10B981;
+}
+
+.stat-card.stat-success .stat-icon {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+}
+
+.stat-card.stat-warning {
+    border-left-color: #F59E0B;
+}
+
+.stat-card.stat-warning .stat-icon {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #F59E0B;
+}
+
+.stat-card.stat-danger {
+    border-left-color: #EF4444;
+}
+
+.stat-card.stat-danger .stat-icon {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+}
+
+/* Panels and Tables */
+.admin-panel {
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.panel-header h3 {
+    font-size: 1.1rem;
+}
+
+.panel-header a {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.panel-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.search-admin {
+    display: flex;
+    gap: 0.5rem;
+    width: 400px;
+}
+
+.search-admin input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    outline: none;
+}
+
+.search-admin input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* Tables */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1.2rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.admin-table th {
+    color: var(--gray-500);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--gray-100);
+}
+
+.admin-table tr:hover {
+    background-color: #F8FAFC;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-active {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.status-pending {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.action-btns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.btn-edit {
+    background-color: #E0E7FF;
+    color: var(--primary);
+}
+
+.btn-edit:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-delete {
+    background-color: #FEE2E2;
+    color: #EF4444;
+}
+
+.btn-delete:hover {
+    background-color: #EF4444;
+    color: white;
+}
+
+.book-img-thumb {
+    width: 40px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Login Admin */
+.login-body {
+    background-color: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    box-shadow: var(--shadow-lg);
+    animation: fadeUp 0.5s ease-out;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-logo {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-logo span {
+    color: var(--secondary-dark);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--gray-800);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    text-align: center;
+    width: 100%;
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: var(--primary);
+}
+
+/* Pagination Admin */
+.admin-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 1.5rem;
+}
+
+.admin-pagination p {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+.admin-pagination-btns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.admin-btn-page {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.admin-btn-page.active {
+    background: var(--primary);
+    color: white;
+}
+/* =========================================
+   VENTANA MODAL (POP-UP)
+   ========================================= */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px);
+    display: none; justify-content: center; align-items: center;
+    z-index: 1000; opacity: 0; transition: opacity 0.3s ease;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-container {
+    background: white; width: 100%; max-width: 500px;
+    border-radius: var(--radius-md); box-shadow: var(--shadow-xl);
+    transform: scale(0.9); transition: transform 0.3s ease;
+    overflow: hidden;
+}
+.modal-overlay.active .modal-container { transform: scale(1); }
+.modal-header {
+    background: var(--gray-50); padding: 1.5rem;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.modal-header h3 { font-size: 1.25rem; font-weight: 600; margin: 0; color: var(--gray-800); }
+.modal-close {
+    background: none; border: none; font-size: 1.5rem; color: var(--gray-500);
+    cursor: pointer; transition: color 0.2s;
+}
+.modal-close:hover { color: var(--danger); }
+.modal-body { padding: 1.5rem; max-height: 70vh; overflow-y: auto; }
+.modal-footer {
+    padding: 1rem 1.5rem; border-top: 1px solid var(--gray-200);
+    display: flex; justify-content: flex-end; gap: 1rem; background: var(--gray-50);
+}
+
+/* =========================================
+   FORMULARIOS
+   ========================================= */
+.form-group { margin-bottom: 1rem; }
+.form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+.form-control { width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none; transition: var(--transition); }
+.form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }

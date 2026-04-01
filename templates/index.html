@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Sistema de Bibliotecas UNDAC</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper CSS (Carrusel) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
+</head>
+
+<body>
+    <!-- Top Institutional Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-links">
+                <a href="https://undac.edu.pe/" target="_blank"><i class="fas fa-university"></i> UNDAC Principal</a>
+                <a href="http://repositorio.undac.edu.pe/" target="_blank"><i class="fas fa-archive"></i> Repositorio
+                    UNDAC</a>
+                <a href="https://extranet.undac.edu.pe/" target="_blank"><i class="fas fa-user-graduate"></i>
+                    Extranet</a>
+                <a href="https://digital.undac.edu.pe/" target="_blank"><i class="fas fa-file-signature"></i>
+                    UNDAC-SGDFD</a>
+                <a href="https://elibro.net/es/lc/undac/login_usuario/" target="_blank"><i class="fas fa-laptop"></i>
+                    Biblioteca Virtual (eLibro)</a>
+                <a href="https://pagalo.pe/" target="_blank" class="pagalo-link"><i class="fas fa-credit-card"></i>
+                    Págalo.pe</a>
+            </div>
+            <div class="top-bar-social">
+                <a href="https://www.facebook.com/undacrrpp/?locale=es_LA" target="_blank" title="Facebook UNDAC"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/Bibliotecaundac/?locale=es_LA" target="_blank"
+                    title="Facebook Biblioteca"><i class="fab fa-facebook-square"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="navbar has-top-bar">
+        <div class="container navbar-container">
+            <div class="logo">
+                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                    <h2>Biblioteca <span>UNDAC</span></h2>
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="/">Inicio</a>
+                <a href="/catalogo.html">Catálogo</a>
+                <a href="http://repositorio.undac.edu.pe/" target="_blank">Repositorio</a>
+                <a href="/videoteca.html">Videoteca</a>
+                <a href="/servicios.html">Servicios</a>
+                <a href="/reglamento.html">Reglamento</a>
+                <a href="/nosotros.html">Nosotros</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="admin-login.html" class="btn btn-outline">Intranet</a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-in">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content" data-aos="zoom-in" data-aos-delay="200">
+            <h1>Descubre el conocimiento infinito</h1>
+            <p>Accede a miles de recursos académicos, libros, revistas y bases de datos exclusivas de la Universidad
+                Nacional Daniel Alcides Carrión.</p>
+
+            <div class="search-box">
+                <div class="search-tabs">
+                    <button class="active">Todo</button>
+                    <button>Catálogo</button>
+                    <button>Repositorio</button>
+                    <button>Revistas</button>
+                </div>
+                <div class="search-input-container">
+                    <input type="text" placeholder="Buscar libros, artículos, tesis y más...">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colecciones Destacadas (Carousel) -->
+    <section class="quick-links container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Colecciones Destacadas</h2>
+            <div class="title-line"></div>
+            <p>Explora nuestras áreas más consultadas</p>
+        </div>
+
+        <div class="swiper-container mySwiper" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="catalogo.html" class="quick-card" style="width: 100%;">
+                        <div class="icon-wrapper"><i class="fas fa-book-open"></i></div>
+                        <h3>Catálogo en Línea</h3>
+                        <p>Encuentra libros impresos disponibles en nuestras sedes.</p>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="http://repositorio.undac.edu.pe/" target="_blank" class="quick-card" style="width: 100%;">
+                        <div class="icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Repositorio</h3>
+                        <p>Tesis y trabajos de investigación UNDAC.</p>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="https://elibro.net/es/lc/undac/login_usuario/" target="_blank" class="quick-card"
+                        style="width: 100%;">
+                        <div class="icon-wrapper"><i class="fas fa-database"></i></div>
+                        <h3>Bases de Datos</h3>
+                        <p>Acceso a recursos electrónicos y revistas científicas.</p>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="quick-card" style="width: 100%;">
+                        <div class="icon-wrapper"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Biblioteca Virtual</h3>
+                        <p>Plataformas de libros electrónicos disponibles 24/7.</p>
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="quick-card" style="width: 100%;">
+                        <div class="icon-wrapper"><i class="fas fa-microscope"></i></div>
+                        <h3>Investigación</h3>
+                        <p>Revistas y papers exclusivos para docentes.</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Controles de navegación -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Paginación -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Servicios Destacados -->
+    <section class="services bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Nuestros Servicios</h2>
+                <div class="title-line"></div>
+                <p>Te acompañamos en tu proceso de aprendizaje e investigación</p>
+            </div>
+            <div class="grid-3">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Asesorías">
+                    <div class="service-content">
+                        <h3>Asesorías Personalizadas</h3>
+                        <p>Reserva una asesoría y recibe el apoyo de un bibliotecólogo especializado en tu área
+                            temática.</p>
+                        <a href="#" class="btn-link">Saber más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Turnitin">
+                    <div class="service-content">
+                        <h3>Uso de Turnitin: Filtros y Reportes</h3>
+                        <p>Servicio de revisión de similitud en trabajos académicos y de investigación para docentes y
+                            estudiantes.</p>
+                        <a href="#" class="btn-link">Saber más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Workshops">
+                    <div class="service-content">
+                        <h3>Capacitaciones y Workshops</h3>
+                        <p>Dirigidos a toda la comunidad universitaria para el manejo de base de datos, APA y recursos.
+                        </p>
+                        <a href="#" class="btn-link">Saber más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news container">
+        <div class="section-header">
+            <h2>Noticias y Eventos</h2>
+            <div class="title-line"></div>
+            <p>Entérate de los últimos acontecimientos en el Sistema de Bibliotecas UNDAC</p>
+        </div>
+        
+        <div class="grid-2">
+            {% if principal %}
+            <div class="news-main" data-aos="fade-right">
+                <div class="news-img" style="background-image: url('{{ principal.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' }}');">
+                </div>
+                <div class="news-content">
+                    <span class="badge">{{ principal.Tipo_Publicacion }}</span>
+                    <h3>{{ principal.Titulo }}</h3>
+                    <p>{{ principal.Contenido[:150] }}...</p>
+                    <p class="date"><i class="far fa-calendar-alt"></i> 
+                        {% if principal.Fecha_Evento %}
+                            Evento programado para: {{ principal.Fecha_Evento.strftime('%d/%m/%Y') }}
+                        {% else %}
+                            Publicado: {{ principal.Fecha_Publicacion.strftime('%d/%m/%Y') }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% else %}
+            <div class="news-main" style="padding: 2rem; background: white; text-align: center; border-radius: 8px;">
+                <p>No hay noticias destacadas por el momento.</p>
+            </div>
+            {% endif %}
+
+            <div class="news-list" data-aos="fade-left">
+                {% for noticia in noticias %}
+                <a href="#" class="news-item">
+                    <div class="news-item-img" style="background-image: url('{{ noticia.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }}');">
+                    </div>
+                    <div class="news-item-content">
+                        <span class="badge badge-outline">{{ noticia.Tipo_Publicacion }}</span>
+                        <h4>{{ noticia.Titulo }}</h4>
+                        <p class="date">{{ noticia.Fecha_Publicacion.strftime('%d/%m/%Y') }}</p>
+                    </div>
+                </a>
+                {% else %}
+                <div style="text-align: center; padding: 2rem; background: white; border-radius: 8px; box-shadow: var(--shadow-sm);">
+                    <p style="color: var(--gray-500);">Aún no se han publicado más noticias o eventos.</p>
+                </div>
+                {% endfor %}
+                
+                {% if principal %}
+                <div class="view-all">
+                    <button class="btn btn-outline w-full">Ver todas las publicaciones</button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-4 footer-top">
+                <div class="footer-col">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                        <h2 class="footer-logo" style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
+                    </div>
+                    <p>Sistema de Bibliotecas de la Universidad Nacional Daniel Alcides Carrión. Fomentando la
+                        investigación y el conocimiento.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Útiles</h3>
+                    <ul>
+                        <li><a href="#">Búsqueda Avanzada</a></li>
+                        <li><a href="#">Guías Temáticas</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Reglamento de Biblioteca</a></li>
+                        <li><a href="#">Buzón de Sugerencias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Sede Central: Pasco, Perú</li>
+                        <li><i class="fas fa-envelope"></i> biblioteca@undac.edu.pe</li>
+                        <li><i class="fas fa-phone-alt"></i> +51 (063) 123456</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Horario de Atención</h3>
+                    <p>Lunes a Viernes:<br>8:00 am - 8:00 pm</p>
+                    <p>Sábados:<br>8:00 am - 1:00 pm</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Universidad Nacional Daniel Alcides Carrión. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Políticas de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <footer class="footer">
+        </footer>
+
+    {% include 'chatbot.html' %}
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../static/js/main.js"></script>
+    <script>
+        // Inicializar animaciones
+        AOS.init({ duration: 800, once: true });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Intranet | Sistema de Bibliotecas UNDAC</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
+</head>
+
+<body class="login-body">
+
+    <div class="login-container">
+        <div class="login-header">
+            <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC"
+                style="height: 60px; width: auto; margin-bottom: 1rem;">
+            <h2 class="login-logo">Biblioteca <span>UNDAC</span></h2>
+            <p>Ingresa tus credenciales institucionales</p>
+        </div>
+
+        <form action="admin-dashboard.html" method="GET">
+            <div class="form-group">
+                <label for="email">Correo Institucional</label>
+                <div style="position: relative;">
+                    <i class="fas fa-envelope"
+                        style="position: absolute; left: 15px; top: 15px; color: var(--gray-500);"></i>
+                    <input type="email" id="email" class="form-control" placeholder="usuario@undac.edu.pe"
+                        style="padding-left: 45px;" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <div style="position: relative;">
+                    <i class="fas fa-lock"
+                        style="position: absolute; left: 15px; top: 15px; color: var(--gray-500);"></i>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••"
+                        style="padding-left: 45px;" required>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                <label
+                    style="display: flex; align-items: center; gap: 0.5rem; color: var(--gray-500); cursor: pointer;">
+                    <input type="checkbox"> Recordarme
+                </label>
+                <a href="#" style="color: var(--primary);">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full" style="padding: 1rem; font-size: 1.1rem;"><i
+                    class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+        </form>
+
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Volver a la página principal</a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Libros | Dashboard UNDAC</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
+</head>
+
+<body class="admin-body">
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                <div>
+                    <h2 style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
+                    <p style="font-size: 0.8rem; color: var(--gray-500);">Panel Administrativo</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <a href="admin-dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="admin-libros.html" class="active"><i class="fas fa-book"></i> Catálogo de Libros</a>
+                <a href="#"><i class="fas fa-users"></i> Usuarios</a>
+                <a href="#"><i class="fas fa-newspaper"></i> Noticias y Eventos</a>
+                <a href="#"><i class="fas fa-chart-bar"></i> Reportes</a>
+                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+            </nav>
+            <div class="admin-user">
+                <div class="user-avatar">A</div>
+                <div>
+                    <p style="font-weight: 600; font-size: 0.9rem;">Admin Principal</p>
+                    <a href="admin-login.html"
+                        style="color: var(--gray-500); font-size: 0.8rem; display: flex; align-items: center; gap: 0.25rem; margin-top: 0.25rem;"><i
+                            class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Catálogo de Libros</h1>
+                <p style="color: var(--gray-500);">Gestiona el inventario de la biblioteca (Añadir, editar o eliminar).
+                </p>
+            </div>
+
+            <div class="admin-panel">
+                <div class="panel-header-actions">
+                    <div class="search-admin">
+                        <input type="text" placeholder="Buscar por título, autor o ISBN...">
+                        <button class="btn btn-primary" style="padding: 0.75rem 1rem;"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                    <button class="btn btn-primary" onclick="openModal('addBookModal')"><i class="fas fa-plus"></i>
+                        Añadir Libro</button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">Portada</th>
+                                <th>Detalles del Libro</th>
+                                <th>Categoría</th>
+                                <th>Ubicación</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Item 1 -->
+                            <tr>
+                                <td><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                        class="book-img-thumb" alt="Portada"></td>
+                                <td>
+                                    <strong style="color: var(--dark); font-size: 1.05rem; display: block;">Estructuras
+                                        de Datos y Algoritmos en Python</strong>
+                                    <span style="font-size: 0.85rem; color: var(--gray-500);">Michael T. Goodrich |
+                                        ISBN: 978-8441539241</span>
+                                </td>
+                                <td><span
+                                        style="background: var(--gray-100); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">Ingeniería</span>
+                                </td>
+                                <td style="font-size: 0.9rem; color: var(--gray-500);">Piso 2, Estante B</td>
+                                <td><strong>3</strong> / 3</td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn-icon btn-edit" title="Editar"><i
+                                                class="fas fa-pen"></i></button>
+                                        <button class="btn-icon btn-delete" title="Eliminar"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Item 2 -->
+                            <tr>
+                                <td><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                        class="book-img-thumb" alt="Portada"></td>
+                                <td>
+                                    <strong style="color: var(--dark); font-size: 1.05rem; display: block;">Anatomía
+                                        Humana</strong>
+                                    <span style="font-size: 0.85rem; color: var(--gray-500);">Henri Rouvière | ISBN:
+                                        978-8445811776</span>
+                                </td>
+                                <td><span
+                                        style="background: var(--gray-100); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">Medicina</span>
+                                </td>
+                                <td style="font-size: 0.9rem; color: var(--gray-500);">Piso 1, Estante A</td>
+                                <td><strong style="color: #EF4444;">0</strong> / 2</td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn-icon btn-edit" title="Editar"><i
+                                                class="fas fa-pen"></i></button>
+                                        <button class="btn-icon btn-delete" title="Eliminar"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Item 3 -->
+                            <tr>
+                                <td><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                        class="book-img-thumb" alt="Portada"></td>
+                                <td>
+                                    <strong style="color: var(--dark); font-size: 1.05rem; display: block;">Principios
+                                        de Microeconomía</strong>
+                                    <span style="font-size: 0.85rem; color: var(--gray-500);">N. Gregory Mankiw | ISBN:
+                                        978-6074818291</span>
+                                </td>
+                                <td><span
+                                        style="background: var(--gray-100); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">Economía</span>
+                                </td>
+                                <td style="font-size: 0.9rem; color: var(--gray-500);">Piso 3, Estante C</td>
+                                <td><strong>5</strong> / 8</td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn-icon btn-edit" title="Editar"><i
+                                                class="fas fa-pen"></i></button>
+                                        <button class="btn-icon btn-delete" title="Eliminar"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="admin-pagination">
+                    <p>Mostrando 3 de 15,482 libros</p>
+                    <div class="admin-pagination-btns">
+                        <button class="btn btn-outline admin-btn-page" disabled>Anterior</button>
+                        <button class="btn btn-outline admin-btn-page active">1</button>
+                        <button class="btn btn-outline admin-btn-page">2</button>
+                        <button class="btn btn-outline admin-btn-page">3</button>
+                        <button class="btn btn-outline admin-btn-page">Siguiente</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Añadir Libro -->
+    <div class="modal-overlay" id="addBookModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Añadir Nuevo Libro</h3>
+                <button class="modal-close" onclick="closeModal('addBookModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addBookForm">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Título del Libro</label>
+                        <input type="text"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);"
+                            placeholder="Ej. El Quijote">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Autor</label>
+                        <input type="text"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);"
+                            placeholder="Ej. Miguel de Cervantes">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Categoría</label>
+                        <select
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                            <option>Ingeniería</option>
+                            <option>Medicina</option>
+                            <option>Ciencias Sociales</option>
+                            <option>Literatura</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addBookModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveBook()">Guardar Libro</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        function saveBook() {
+            // Animación de guardado
+            const btn = document.querySelector('.modal-footer .btn-primary');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                closeModal('addBookModal');
+                // Aquí iría un toast en el futuro de "Guardado con éxito"
+                alert('Libro guardado con éxito (Simulación)');
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

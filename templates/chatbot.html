@@ -1,0 +1,167 @@
+<style>
+        /* Estilos del Chatbot */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+        .chatbot-btn:hover { transform: scale(1.1); background-color: var(--secondary); color: var(--dark); }
+        
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chatbot-window.active { display: flex; }
+        
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .close-chat { cursor: pointer; color: white; border: none; background: transparent; font-size: 1.2rem; }
+        
+        .chat-body {
+            height: 350px;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .msg-bot { background: white; padding: 0.75rem; border-radius: 10px 10px 10px 0; border: 1px solid #e2e8f0; color: #334155; font-size: 0.9rem; width: 85%; align-self: flex-start; }
+        .msg-user { background: var(--primary); color: white; padding: 0.75rem; border-radius: 10px 10px 0 10px; font-size: 0.9rem; width: fit-content; max-width: 85%; align-self: flex-end; }
+        
+        .chat-options { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+        .chat-option-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .chat-option-btn:hover { background: var(--primary); color: white; }
+        
+        .pdf-download-btn {
+            display: inline-block;
+            margin-top: 0.5rem;
+            background: #ef4444;
+            color: white !important;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .pdf-download-btn:hover { background: #dc2626; }
+    </style>
+
+    <div class="chatbot-btn" id="chatbotToggle" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chat-header">
+            <span><i class="fas fa-robot"></i> Asistente DIUNSIBI</span>
+            <button class="close-chat" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="msg-bot">
+                ¡Hola! Soy el asistente virtual de la biblioteca UNDAC. Haz clic en una de las opciones para ayudarte:
+                <div class="chat-options" id="initial-options">
+                    <button class="chat-option-btn" onclick="sendOption('requisitos', 'Requisitos para Repositorio')">Requisitos para Repositorio</button>
+                    <button class="chat-option-btn" onclick="sendOption('autorizacion', 'Formato de Autorización')">Formato de Autorización</button>
+                    <button class="chat-option-btn" onclick="sendOption('horario', 'Horarios de Atención')">Horarios de Atención</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatWindow.classList.toggle('active');
+        }
+
+        function sendOption(optionType, optionText) {
+            const chatBody = document.getElementById('chatBody');
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg-user';
+            userMsg.innerText = optionText;
+            chatBody.appendChild(userMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg-bot';
+
+                if (optionType === 'requisitos') {
+                    botMsg.innerHTML = `
+                        Para publicar tu trabajo en el repositorio debes enviar al correo <strong>repositorio@undac.edu.pe</strong> los siguientes documentos en formato digital: <br><br>
+                        • Informe y Reporte de similitud (Turnitin).<br>
+                        • Acta de sustentación en PDF.<br>
+                        • Copia de DNI a colores.<br>
+                        • Archivo en Word y PDF.<br><br>
+                        <em>Evite fotografiar sus documentos.</em>
+                        <br>
+                        <a href="../static/uploads/pdfs/requisitos_repositorio.pdf" target="_blank" class="pdf-download-btn"><i class="fas fa-file-pdf"></i> Ver PDF de Requisitos</a>
+                    `;
+                } 
+                else if (optionType === 'autorizacion') {
+                    botMsg.innerHTML = `
+                        Necesitas llenar la <strong>Autorización para Publicación de Trabajos de Investigación</strong>. <br><br>
+                        Este documento debe ser rellenado a computadora y firmado.
+                        <br>
+                        <a href="../static/uploads/pdfs/autorizacion_pregrado.pdf" target="_blank" class="pdf-download-btn"><i class="fas fa-file-pdf"></i> Descargar Formato</a>
+                    `;
+                }
+                else if (optionType === 'horario') {
+                    botMsg.innerHTML = `Nuestro horario de atención en la Biblioteca Central es de Lunes a Viernes de 7:30 a 21:00 horas.`;
+                }
+
+                chatBody.appendChild(botMsg);
+                
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'chat-options';
+                optionsDiv.innerHTML = `
+                    <button class="chat-option-btn" onclick="sendOption('requisitos', 'Requisitos para Repositorio')">Requisitos para Repositorio</button>
+                    <button class="chat-option-btn" onclick="sendOption('autorizacion', 'Formato de Autorización')">Formato de Autorización</button>
+                `;
+                botMsg.appendChild(optionsDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 500);
+        }
+    </script>
