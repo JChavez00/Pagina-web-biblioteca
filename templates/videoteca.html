@@ -1,227 +1,118 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videoteca | Sistema de Bibliotecas UNDAC</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS Animation CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/style.css">
-    <!-- Favicon -->
-    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/x-icon">
-</head>
+{% block title %}Videoteca | Sistema de Bibliotecas UNDAC{% endblock %}
 
-<body class="videoteca-body">
+{% block body_class %} class="videoteca-body"{% endblock %}
 
-    <!-- Top Institutional Bar -->
-    <div class="top-bar">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="top-bar-links">
-                <a href="https://undac.edu.pe/" target="_blank"><i class="fas fa-university"></i> UNDAC Principal</a>
-                <a href="http://repositorio.undac.edu.pe/" target="_blank"><i class="fas fa-archive"></i> Repositorio
-                    UNDAC</a>
-                <a href="https://extranet.undac.edu.pe/" target="_blank"><i class="fas fa-user-graduate"></i>
-                    Extranet</a>
-                <a href="https://digital.undac.edu.pe/" target="_blank"><i class="fas fa-file-signature"></i>
-                    UNDAC-SGDFD</a>
-                <a href="https://elibro.net/es/lc/undac/login_usuario/" target="_blank"><i class="fas fa-laptop"></i>
-                    Biblioteca Virtual (eLibro)</a>
-                <a href="https://pagalo.pe/" target="_blank" class="pagalo-link"><i class="fas fa-credit-card"></i>
-                    Págalo.pe</a>
+{% block content %}
+<section class="videoteca-hero">
+    <div class="videoteca-hero-content" data-aos="fade-up">
+        <span style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Ciclo de Conferencias 2026</span>
+        <h1>El futuro de la Inteligencia Artificial en la Academia</h1>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #e2e8f0;">Descubre cómo las nuevas tecnologías están transformando los procesos de investigación y redacción científica en la universidad moderna.</p>
+        <button class="play-btn-large">
+            <i class="fas fa-play"></i> Reproducir Video Principal
+        </button>
+    </div>
+</section>
+
+<main class="container video-section">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;" data-aos="fade-up">
+        <div class="search-admin" style="background: #1e293b; max-width: 400px; width: 100%;">
+            <input type="text" placeholder="Buscar video, autor o serie..." style="color: white;">
+            <button class="btn" style="background: transparent; color: white;"><i class="fas fa-search"></i></button>
+        </div>
+        <select style="padding: 0.75rem 1rem; border-radius: 8px; background: #1e293b; color: white; border: 1px solid #334155;">
+            <option value="todas">Todas las categorías</option>
+            <option value="tutoriales">Tutoriales Base de Datos</option>
+            <option value="entrevistas">Entrevistas e Investigación</option>
+            <option value="jueves-cultural">Jueves Culturales UNDAC</option>
+        </select>
+    </div>
+
+    <h2 data-aos="fade-right">Tutoriales: Bases de Datos Académicas</h2>
+    <div class="video-grid" style="margin-bottom: 4rem;">
+        <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Scopus Tutorial">
+                <span class="video-duration">14:20</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
             </div>
-            <div class="top-bar-social">
-                <a href="https://www.facebook.com/undacrrpp/?locale=es_LA" target="_blank"><i
-                        class="fab fa-facebook-f"></i></a>
-                <a href="https://www.facebook.com/Bibliotecaundac/?locale=es_LA" target="_blank"><i
-                        class="fab fa-facebook-square"></i></a>
+            <div class="video-info">
+                <h3>Cómo realizar búsquedas avanzadas en Scopus</h3>
+                <p>Módulo 1 - Alfabetización Informacional</p>
+            </div>
+        </div>
+        <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="E-Libro Tutorial">
+                <span class="video-duration">08:45</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="video-info">
+                <h3>Navegación y descarga de libros en eLibro</h3>
+                <p>Módulo 1 - Alfabetización Informacional</p>
+            </div>
+        </div>
+        <div class="video-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1542621334-a2542d773431?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Turnitin Tutorial">
+                <span class="video-duration">22:10</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="video-info">
+                <h3>Interpretación de reportes de similitud en Turnitin</h3>
+                <p>Herramientas para Docentes</p>
+            </div>
+        </div>
+        <div class="video-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mendeley Tutorial">
+                <span class="video-duration">18:30</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="video-info">
+                <h3>Gestión de referencias con Mendeley Reference Manager</h3>
+                <p>Taller de Redacción Científica</p>
             </div>
         </div>
     </div>
 
-    <header class="navbar has-top-bar" style="background-color: #0f172a; border-bottom: 1px solid #1e293b;">
-        <div class="container navbar-container">
-            <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" class="logo-img" style="filter: brightness(0) invert(1); height: 40px; width: auto;">
-                    <h2 style="color: white;">Biblioteca <span style="color: var(--secondary);">UNDAC</span></h2>
-                </a>
+    <h2 data-aos="fade-right">Jueves Culturales UNDAC</h2>
+    <div class="video-grid" style="margin-bottom: 2rem;">
+        <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1478147424044-4874c7717466?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Literatura">
+                <span class="video-duration">55:00</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
             </div>
-            <nav class="nav-links">
-                <a href="/" style="color: #cbd5e1;">Inicio</a>
-                <a href="/catalogo.html" style="color: #cbd5e1;">Catálogo</a>
-                <a href="http://repositorio.undac.edu.pe/" target="_blank" style="color: #cbd5e1;">Repositorio</a>
-                <a href="/videoteca.html" class="active" style="color: white; border-bottom-color: var(--secondary);">Videoteca</a>
-                <a href="/servicios.html" style="color: #cbd5e1;">Servicios</a>
-                <a href="/reglamento.html" style="color: #cbd5e1;">Reglamento</a>
-                <a href="/nosotros.html" style="color: #cbd5e1;">Nosotros</a>
-            </nav>
-            <div class="nav-actions">
-                <a href="/admin-login.html" class="btn btn-primary" style="background-color: var(--secondary); color: var(--dark);">Intranet</a>
+            <div class="video-info">
+                <h3>Análisis de la obra de César Vallejo</h3>
+                <p>Facultad de Ciencias de la Educación</p>
             </div>
         </div>
-    </header>
-
-    <!-- Hero Video Section -->
-    <section class="videoteca-hero">
-        <div class="videoteca-hero-content" data-aos="fade-up">
-            <span
-                style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Ciclo
-                de Conferencias 2026</span>
-            <h1>El futuro de la Inteligencia Artificial en la Academia</h1>
-            <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #e2e8f0;">Descubre cómo las nuevas tecnologías
-                están transformando los procesos de investigación y redacción científica en la universidad moderna.</p>
-            <button class="play-btn-large">
-                <i class="fas fa-play"></i> Reproducir Video Principal
-            </button>
-        </div>
-    </section>
-
-    <!-- Secciones de Videos Grid -->
-    <main class="container video-section">
-
-        <!-- Controles de filtrado/búsqueda -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;"
-            data-aos="fade-up">
-            <div class="search-admin" style="background: #1e293b; max-width: 400px; width: 100%;">
-                <input type="text" placeholder="Buscar video, autor o serie..." style="color: white;">
-                <button class="btn" style="background: transparent; color: white;"><i
-                        class="fas fa-search"></i></button>
+        <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1460518451285-b82b3dcb7831?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Psicologia">
+                <span class="video-duration">42:15</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
             </div>
-            <select
-                style="padding: 0.75rem 1rem; border-radius: 8px; background: #1e293b; color: white; border: 1px solid #334155;">
-                <option value="todas">Todas las categorías</option>
-                <option value="tutoriales">Tutoriales Base de Datos</option>
-                <option value="entrevistas">Entrevistas e Investigación</option>
-                <option value="jueves-cultural">Jueves Culturales UNDAC</option>
-            </select>
-        </div>
-
-        <!-- Categoría 1 -->
-        <h2 data-aos="fade-right">Tutoriales: Bases de Datos Académicas</h2>
-        <div class="video-grid" style="margin-bottom: 4rem;">
-            <!-- Video 1 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Scopus Tutorial">
-                    <span class="video-duration">14:20</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Cómo realizar búsquedas avanzadas en Scopus</h3>
-                    <p>Módulo 1 - Alfabetización Informacional</p>
-                </div>
-            </div>
-            <!-- Video 2 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="E-Libro Tutorial">
-                    <span class="video-duration">08:45</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Navegación y descarga de libros en eLibro</h3>
-                    <p>Módulo 1 - Alfabetización Informacional</p>
-                </div>
-            </div>
-            <!-- Video 3 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1542621334-a2542d773431?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Turnitin Tutorial">
-                    <span class="video-duration">22:10</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Interpretación de reportes de similitud en Turnitin</h3>
-                    <p>Herramientas para Docentes</p>
-                </div>
-            </div>
-            <!-- Video 4 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Mendeley Tutorial">
-                    <span class="video-duration">18:30</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Gestión de referencias con Mendeley Reference Manager</h3>
-                    <p>Taller de Redacción Científica</p>
-                </div>
+            <div class="video-info">
+                <h3>Salud Mental de los Estudiantes en la Era Digital</h3>
+                <p>Psicología y Bienestar Universitario</p>
             </div>
         </div>
-
-        <!-- Categoría 2 -->
-        <h2 data-aos="fade-right">Jueves Culturales UNDAC</h2>
-        <div class="video-grid" style="margin-bottom: 2rem;">
-            <!-- Video 5 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1478147424044-4874c7717466?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Literatura">
-                    <span class="video-duration">55:00</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Análisis de la obra de César Vallejo</h3>
-                    <p>Facultad de Ciencias de la Educación</p>
-                </div>
+        <div class="video-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ingenieria">
+                <span class="video-duration">1:18:20</span>
+                <div class="video-play-icon"><i class="fas fa-play"></i></div>
             </div>
-            <!-- Video 6 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1460518451285-b82b3dcb7831?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Psicologia">
-                    <span class="video-duration">42:15</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Salud Mental de los Estudiantes en la Era Digital</h3>
-                    <p>Psicología y Bienestar Universitario</p>
-                </div>
-            </div>
-            <!-- Video 7 -->
-            <div class="video-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="video-thumb">
-                    <img src="https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Ingenieria">
-                    <span class="video-duration">1:18:20</span>
-                    <div class="video-play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="video-info">
-                    <h3>Innovaciones en la Ingeniería de Minas en Cerro de Pasco</h3>
-                    <p>Semana de la Ingeniería UNDAC</p>
-                </div>
+            <div class="video-info">
+                <h3>Innovaciones en la Ingeniería de Minas en Cerro de Pasco</h3>
+                <p>Semana de la Ingeniería UNDAC</p>
             </div>
         </div>
-
-    </main>
-
-    <!-- Footer adaptado -->
-    <footer class="footer" style="background-color: #020617; border-top: 1px solid #1e293b; color: #94a3b8;">
-        <div class="container footer-content"
-            style="display: flex; justify-content: center; align-items: center; padding: 2rem 0; flex-direction: column; gap: 1rem;">
-            <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="width: 50px; opacity: 0.5;">
-            <p>&copy; 2026 Sistema de Bibliotecas - Universidad Nacional Daniel Alcides Carrión.</p>
-        </div>
-    </footer>
-
-    <!-- AOS Animation JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Custom JS -->
-    <script src="../static/js/main.js"></script>
-    <script>
-        // Inicializar animaciones
-        AOS.init({ duration: 800, once: true });
-    </script>
-</body>
-
-</html>
+    </div>
+</main>
+{% endblock %}

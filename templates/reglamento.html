@@ -1,130 +1,92 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reglamento | Sistema de Bibliotecas UNDAC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
-    <style>
-        .reglamento-card { background: white; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); margin-bottom: 2rem; }
-        .reglamento-card h3 { color: var(--primary); border-bottom: 2px solid var(--secondary); display: inline-block; margin-bottom: 1.5rem; padding-bottom: 0.3rem; }
-        .table-reglamento { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        .table-reglamento th, .table-reglamento td { padding: 1rem; border: 1px solid var(--gray-200); text-align: left; }
-        .table-reglamento th { background: var(--gray-100); color: var(--primary); }
-        .alert-danger { background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: var(--radius-sm); border-left: 4px solid #ef4444; margin-top: 1rem; }
-    </style>
-</head>
+{% block title %}Reglamento | Sistema de Bibliotecas UNDAC{% endblock %}
 
-<body>
-    <header class="navbar">
-        <div class="container navbar-container">
-            <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
-                    <h2>Biblioteca <span>UNDAC</span></h2>
-                </a>
+{% block content %}
+<style>
+    .reglamento-card { background: white; padding: 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); margin-bottom: 2rem; }
+    .reglamento-card h3 { color: var(--primary); border-bottom: 2px solid var(--secondary); display: inline-block; margin-bottom: 1.5rem; padding-bottom: 0.3rem; }
+    .table-reglamento { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .table-reglamento th, .table-reglamento td { padding: 1rem; border: 1px solid var(--gray-200); text-align: left; }
+    .table-reglamento th { background: var(--gray-100); color: var(--primary); }
+    .alert-danger { background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: var(--radius-sm); border-left: 4px solid #ef4444; margin-top: 1rem; }
+</style>
+
+<section class="page-header" style="background: linear-gradient(to right, #1E293B, #0F172A);">
+    <div class="container" data-aos="fade-up">
+        <h1>Reglamento del Sistema de Bibliotecas</h1>
+        <p>Normas de uso, derechos, deberes y transparencia en los procesos administrativos.</p>
+    </div>
+</section>
+
+<main class="container" style="padding: 4rem 1.5rem;">
+    <div class="reglamento-card" data-aos="fade-up">
+        <h3>Capítulo I: De los Usuarios</h3>
+        <div class="grid-2" style="gap: 2rem; margin-top: 1rem;">
+            <div>
+                <h4 style="margin-bottom: 0.5rem;"><i class="fas fa-user-graduate"></i> Usuarios Internos</h4>
+                <p style="color: var(--gray-500);">Docentes, investigadores, estudiantes de Pregrado y Postgrado con matrícula vigente, y personal administrativo[cite: 41, 42, 43].</p>
             </div>
-            <nav class="nav-links">
-                <a href="/">Inicio</a>
-                <a href="/catalogo.html">Catálogo</a>
-                <a href="http://repositorio.undac.edu.pe/" target="_blank">Repositorio</a>
-                <a href="/videoteca.html">Videoteca</a>
-                <a href="/servicios.html">Servicios</a>
-                <a href="/reglamento.html">Reglamento</a>
-                <a href="/nosotros.html">Nosotros</a>
-            </nav>
-            <div class="nav-actions">
-                <a href="admin-login.html" class="btn btn-outline">Intranet</a>
+            <div>
+                <h4 style="margin-bottom: 0.5rem;"><i class="fas fa-user-friends"></i> Usuarios Externos</h4>
+                <p style="color: var(--gray-500);">Ex alumnos, estudiantes del Centro Pre y personas ajenas a la comunidad universitaria con identificación vigente[cite: 46, 47, 48].</p>
             </div>
         </div>
-    </header>
+    </div>
 
-    <section class="page-header" style="background: linear-gradient(to right, #1E293B, #0F172A);">
-        <div class="container" data-aos="fade-up">
-            <h1>Reglamento del Sistema de Bibliotecas</h1>
-            <p>Normas de uso, derechos, deberes y transparencia en los procesos administrativos.</p>
+    <div class="reglamento-card" data-aos="fade-up">
+        <h3>Deberes y Prohibiciones</h3>
+        <ul class="service-list" style="columns: 2;">
+            <li><i class="fas fa-exclamation-triangle"></i> Guardar silencio absoluto en las salas[cite: 60].</li>
+            <li><i class="fas fa-exclamation-triangle"></i> No ingresar alimentos ni bebidas[cite: 62].</li>
+            <li><i class="fas fa-exclamation-triangle"></i> No colocar mochilas sobre las mesas de lectura[cite: 64].</li>
+            <li><i class="fas fa-exclamation-triangle"></i> Prohibido el ingreso con vestimenta hospitalaria (mandiles, scrubs)[cite: 63].</li>
+            <li><i class="fas fa-exclamation-triangle"></i> Respetar las fechas de devolución de materiales[cite: 57].</li>
+        </ul>
+    </div>
+
+    <div class="reglamento-card" data-aos="fade-up">
+        <h3>Anexo 2: Tarifas y Multas</h3>
+        <p style="color: var(--gray-500); margin-bottom: 1rem;">Los pagos se depositan directamente a la cuenta de tesorería UNDAC[cite: 201].</p>
+        <table class="table-reglamento">
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Retraso en devolución (por día)</td>
+                    <td>S/. 5.00</td>
+                </tr>
+                <tr>
+                    <td>Carné de Lector (vigencia anual)</td>
+                    <td>S/. 6.00</td>
+                </tr>
+                <tr>
+                    <td>Constancia de NO ADEUDAR</td>
+                    <td>S/. 5.00</td>
+                </tr>
+                <tr>
+                    <td>Procesamiento de libros</td>
+                    <td>S/. 25.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert-danger">
+            <strong>Nota sobre libros de Alta Demanda:</strong> El retraso en estos ejemplares genera una multa acumulable por cada hora transcurrida[cite: 94].
         </div>
-    </section>
+    </div>
 
-    <main class="container" style="padding: 4rem 1.5rem;">
-        
-        <div class="reglamento-card" data-aos="fade-up">
-            <h3>Capítulo I: De los Usuarios</h3>
-            <div class="grid-2" style="gap: 2rem; margin-top: 1rem;">
-                <div>
-                    <h4 style="margin-bottom: 0.5rem;"><i class="fas fa-user-graduate"></i> Usuarios Internos</h4>
-                    <p style="color: var(--gray-500);">Docentes, investigadores, estudiantes de Pregrado y Postgrado con matrícula vigente, y personal administrativo[cite: 41, 42, 43].</p>
-                </div>
-                <div>
-                    <h4 style="margin-bottom: 0.5rem;"><i class="fas fa-user-friends"></i> Usuarios Externos</h4>
-                    <p style="color: var(--gray-500);">Ex alumnos, estudiantes del Centro Pre y personas ajenas a la comunidad universitaria con identificación vigente[cite: 46, 47, 48].</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="reglamento-card" data-aos="fade-up">
-            <h3>Deberes y Prohibiciones</h3>
-            <ul class="service-list" style="columns: 2;">
-                <li><i class="fas fa-exclamation-triangle"></i> Guardar silencio absoluto en las salas[cite: 60].</li>
-                <li><i class="fas fa-exclamation-triangle"></i> No ingresar alimentos ni bebidas[cite: 62].</li>
-                <li><i class="fas fa-exclamation-triangle"></i> No colocar mochilas sobre las mesas de lectura[cite: 64].</li>
-                <li><i class="fas fa-exclamation-triangle"></i> Prohibido el ingreso con vestimenta hospitalaria (mandiles, scrubs)[cite: 63].</li>
-                <li><i class="fas fa-exclamation-triangle"></i> Respetar las fechas de devolución de materiales[cite: 57].</li>
-            </ul>
-        </div>
-
-        <div class="reglamento-card" data-aos="fade-up">
-            <h3>Anexo 2: Tarifas y Multas</h3>
-            <p style="color: var(--gray-500); margin-bottom: 1rem;">Los pagos se depositan directamente a la cuenta de tesorería UNDAC[cite: 201].</p>
-            <table class="table-reglamento">
-                <thead>
-                    <tr>
-                        <th>Concepto</th>
-                        <th>Monto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Retraso en devolución (por día)</td>
-                        <td>S/. 5.00</td>
-                    </tr>
-                    <tr>
-                        <td>Carné de Lector (vigencia anual)</td>
-                        <td>S/. 6.00</td>
-                    </tr>
-                    <tr>
-                        <td>Constancia de NO ADEUDAR</td>
-                        <td>S/. 5.00</td>
-                    </tr>
-                    <tr>
-                        <td>Procesamiento de libros</td>
-                        <td>S/. 25.00</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="alert-danger">
-                <strong>Nota sobre libros de Alta Demanda:</strong> El retraso en estos ejemplares genera una multa acumulable por cada hora transcurrida[cite: 94].
-            </div>
-        </div>
-
-        <div class="reglamento-card" data-aos="fade-up" style="border-left: 5px solid #ef4444;">
-            <h3 style="color: #991b1b; border-bottom-color: #ef4444;">Faltas Graves y Sanciones</h3>
-            <p style="margin-bottom: 1rem;">Las faltas graves causan la suspensión temporal de todos los servicios durante un semestre académico[cite: 151]:</p>
-            <ul class="service-list">
-                <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Sustracción, mutilación o deterioro del material bibliográfico[cite: 153].</li>
-                <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Uso de documento de identidad de otra persona[cite: 152].</li>
-                <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Pérdida de material (requiere reposición de libro nuevo más suspensión)[cite: 155, 156].</li>
-            </ul>
-        </div>
-
-    </main>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 800, once: true });</script>
-</body>
-</html>
+    <div class="reglamento-card" data-aos="fade-up" style="border-left: 5px solid #ef4444;">
+        <h3 style="color: #991b1b; border-bottom-color: #ef4444;">Faltas Graves y Sanciones</h3>
+        <p style="margin-bottom: 1rem;">Las faltas graves causan la suspensión temporal de todos los servicios durante un semestre académico[cite: 151]:</p>
+        <ul class="service-list">
+            <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Sustracción, mutilación o deterioro del material bibliográfico[cite: 153].</li>
+            <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Uso de documento de identidad de otra persona[cite: 152].</li>
+            <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Pérdida de material (requiere reposición de libro nuevo más suspensión)[cite: 155, 156].</li>
+        </ul>
+    </div>
+</main>
+{% endblock %}

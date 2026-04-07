@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Sistema de Bibliotecas UNDAC</title>
+    <title>{% block title %}Biblioteca UNDAC{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
     <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
 </head>
 
-<body>
+<body{% block body_class %}{% endblock %}>
     <!-- Top Institutional Bar -->
     <div class="top-bar">
         <div class="container">
@@ -320,7 +321,4 @@
         }
     </script>
 </body>
-
-</html>
-
 </html>

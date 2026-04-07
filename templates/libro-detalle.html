@@ -1,184 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estructuras de Datos y Algoritmos en Python | Biblioteca UNDAC</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/style.css">
-    <!-- Favicon -->
-    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
-</head>
+{% block title %}Estructuras de Datos y Algoritmos en Python | Biblioteca UNDAC{% endblock %}
 
-<body>
-    <!-- Header -->
-    <header class="navbar">
-        <div class="container navbar-container">
-            <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
-                    <h2>Biblioteca <span>UNDAC</span></h2>
-                </a>
-            </div>
-            <nav class="nav-links">
-                <a href="/">Inicio</a>
-                <a href="/catalogo.html">Catálogo</a>
-                <a href="http://repositorio.undac.edu.pe/" target="_blank">Repositorio</a>
-                <a href="/videoteca.html">Videoteca</a>
-                <a href="/servicios.html">Servicios</a>
-                <a href="/reglamento.html">Reglamento</a>
-                <a href="/nosotros.html">Nosotros</a>
-            </nav>
-            <div class="nav-actions">
-                <a href="admin-login.html" class="btn btn-outline">Intranet</a>
-                <div class="menu-toggle" id="mobile-menu">
-                    <i class="fas fa-bars"></i>
+{% block content %}
+<div class="breadcrumb">
+    <div class="container">
+        <a href="/">Inicio</a> <i class="fas fa-chevron-right"></i>
+        <a href="/catalogo.html">Catálogo</a> <i class="fas fa-chevron-right"></i>
+        <span>{{ libro.categoria.Nombre_Categoria if libro.categoria else 'General' }}</span> <i class="fas fa-chevron-right"></i>
+        <span class="current">{{ libro.Titulo }}</span>
+    </div>
+</div>
+
+<section class="book-detail-section">
+    <div class="container">
+        <div class="grid-2 book-detail-grid">
+            <div class="book-sticky-sidebar">
+                <div class="book-cover-panel">
+                    <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="Portada de {{ libro.Titulo }}">
+                    
+                    {% if libro.Copias_Disponibles > 0 %}
+                        <span class="book-status" style="background: var(--secondary);"><i class="fas fa-check-circle"></i> {{ libro.Copias_Disponibles }} Copias Disponibles</span>
+                    {% else %}
+                        <span class="book-status" style="background: #ef4444; color: white;"><i class="fas fa-times-circle"></i> Agotado temporalmente</span>
+                    {% endif %}
+
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+                        <button class="btn btn-primary w-full" {% if libro.Copias_Disponibles == 0 %}disabled{% endif %}><i class="fas fa-bookmark"></i> Reservar este libro</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <div class="container">
-            <a href="/">Inicio</a> <i class="fas fa-chevron-right"></i>
-            <a href="/catalogo.html">Catálogo</a> <i class="fas fa-chevron-right"></i>
-            <span>Ingeniería</span> <i class="fas fa-chevron-right"></i>
-            <span class="current">Estructuras de Datos y Algoritmos en Python</span>
+            <div>
+                <span class="book-info-category">{{ libro.categoria.Nombre_Categoria if libro.categoria else 'General' }}</span>
+                <h1 class="book-info-title">{{ libro.Titulo }}</h1>
+                <p class="book-info-author">Por <strong>{{ libro.Autor }}</strong></p>
+
+                <div class="book-info-panel">
+                    <h3>Sinopsis</h3>
+                    <p>{{ libro.Sinopsis or 'No hay sinopsis disponible para este libro.' }}</p>
+                </div>
+
+                <div class="book-info-panel">
+                    <h3>Detalles del Libro</h3>
+                    <div class="book-details-grid">
+                        <div class="book-details-label">ISBN:</div>
+                        <div>{{ libro.ISBN or 'N/A' }}</div>
+
+                        <div class="book-details-label">Año de Edición:</div>
+                        <div>{{ libro.Anio_Edicion or 'N/A' }}</div>
+
+                        <div class="book-details-label">Ubicación Física:</div>
+                        <div>{{ libro.Ubicacion_Fisica or 'Consultar en recepción' }}</div>
+                        
+                        <div class="book-details-label">Stock Total:</div>
+                        <div>{{ libro.Copias_Totales }} copias en inventario</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Book Detail Content -->
-    <section class="book-detail-section">
-        <div class="container">
-            <div class="grid-2 book-detail-grid">
-
-                <!-- Book Image & Actions -->
-                <div class="book-sticky-sidebar">
-                    <div class="book-cover-panel">
-                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Estructuras de Datos">
-                        <span class="book-status"><i class="fas fa-check-circle"></i> 3 Copias Disponibles</span>
-
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <button class="btn btn-primary w-full"><i class="fas fa-bookmark"></i> Reservar este
-                                libro</button>
-                            <button class="btn btn-outline w-full"><i class="fas fa-share-alt"></i> Compartir</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Book Info -->
-                <div>
-                    <span class="book-info-category">Ingeniería de Sistemas</span>
-                    <h1 class="book-info-title">Estructuras de Datos y Algoritmos en Python</h1>
-                    <p class="book-info-author">Por <strong>Michael T. Goodrich</strong>, <strong>Roberto
-                            Tamassia</strong>, <strong>Michael H. Goldwasser</strong></p>
-
-                    <div class="book-info-panel">
-                        <h3>Sinopsis</h3>
-                        <p>
-                            Basado en el éxito comercial de "Data Structures and Algorithms in Java", este nuevo título
-                            ofrece una introducción completa e integral a las estructuras de datos y algoritmos, esta
-                            vez diseñados explícitamente y de manera nativa para el lenguaje de programación Python.
-                            <br><br>
-                            El libro proporciona un enfoque moderno orientado a objetos para el uso de estructuras de
-                            datos estándar y algoritmos asociados, con descripciones detalladas de su implementación
-                            práctica eficiente mediante el lenguaje Python.
-                        </p>
-                    </div>
-
-                    <div class="book-info-panel">
-                        <h3>Detalles del Libro</h3>
-
-                        <div class="book-details-grid">
-                            <div class="book-details-label">ISBN:</div>
-                            <div>978-8441539241</div>
-
-                            <div class="book-details-label">Editorial:</div>
-                            <div>Anaya Multimedia</div>
-
-                            <div class="book-details-label">Año de Edición:</div>
-                            <div>2017</div>
-
-                            <div class="book-details-label">Nº Páginas:</div>
-                            <div>784</div>
-
-                            <div class="book-details-label">Idioma:</div>
-                            <div>Español</div>
-
-                            <div class="book-details-label">Ubicación:</div>
-                            <div>Piso 2 - Estante B - Fila 4</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="grid-4 footer-top">
-                <div class="footer-col">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                        <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
-                        <h2 class="footer-logo" style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
-                    </div>
-                    <p>Sistema de Bibliotecas de la Universidad Nacional Daniel Alcides Carrión. Fomentando la
-                        investigación y el conocimiento.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Enlaces Útiles</h3>
-                    <ul>
-                        <li><a href="#">Búsqueda Avanzada</a></li>
-                        <li><a href="#">Guías Temáticas</a></li>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Reglamento de Biblioteca</a></li>
-                        <li><a href="#">Buzón de Sugerencias</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Sede Central: Pasco, Perú</li>
-                        <li><i class="fas fa-envelope"></i> biblioteca@undac.edu.pe</li>
-                        <li><i class="fas fa-phone-alt"></i> +51 (063) 123456</li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Horario de Atención</h3>
-                    <p>Lunes a Viernes:<br>8:00 am - 8:00 pm</p>
-                    <p>Sábados:<br>8:00 am - 1:00 pm</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Universidad Nacional Daniel Alcides Carrión. Todos los derechos reservados.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Políticas de Privacidad</a>
-                    <a href="#">Términos de Uso</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Custom JS -->
-    <script src="../static/js/main.js"></script>
-</body>
-
-</html>
+</section>
+{% endblock %}

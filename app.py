@@ -1,10 +1,11 @@
 import os
 import urllib.parse
+import pandas as pd  # <--- NUEVA IMPORTACIÓN
+import uuid  # <--- AGREGA ESTO
 from dotenv import load_dotenv
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect # <--- AGREGAR request y redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
 # Cargar las variables del archivo .env
 load_dotenv()
 
@@ -96,7 +97,135 @@ def index():
 
 @app.route("/catalogo.html")
 def catalogo():
-    return render_template("catalogo.html")
+    # Obtenemos todos los libros de la base de datos
+    libros = Libro.query.all()
+    # Se los pasamos a la plantilla
+    return render_template("catalogo.html", libros=libros)
+
+# Modificamos la ruta para que acepte un ID numérico
+@app.route("/libro-detalle/<int:id_libro>")
+def libro_detalle(id_libro):
+    # Buscamos el libro por su ID, si no existe devuelve un error 404
+    libro = Libro.query.get_or_404(id_libro)
+    return render_template("libro-detalle.html", libro=libro)
+
+@app.route("/admin-libros.html")
+def admin_libros():
+    # Para la tabla del administrador también necesitamos los libros
+    libros = Libro.query.all()
+    return render_template("admin-libros.html", libros=libros)
+
+@app.route("/admin/importar-libros", methods=['POST'])
+def importar_libros():
+    # 1. Verificar que se haya enviado un archivo
+    if 'archivo_csv' not in request.files:
+        return "No se envió ningún archivo", 400
+    
+    file = request.files['archivo_csv']
+    if file.filename == '':
+        return "No se seleccionó ningún archivo", 400
+
+    if file and file.filename.endswith('.csv'):
+        # 2. Leer el archivo CSV
+        stream = io.StringIO(file.stream.read().decode("UTF8"), newline=None)
+        csv_reader = csv.DictReader(stream)
+        
+        for row in csv_reader:
+            # 3. Extraer los datos según las columnas de tu Excel real
+            titulo = row.get('NOMBRE', '').strip()
+            autor = row.get('AUTOR', '').strip()
+            materia = row.get('MATERIA', '').strip()
+            tema = row.get('TEMA', '').strip()
+            
+            if not titulo:
+                continue # Si no hay título, saltamos esa fila
+
+            # 4. Buscar o crear la categoría (MATERIA) dinámicamente
+            id_categoria = None
+            if materia:
+                categoria = Categoria.query.filter_by(Nombre_Categoria=materia).first()
+                if not categoria:
+                    categoria = Categoria(Nombre_Categoria=materia)
+                    db.session.add(categoria)
+                    db.session.commit() # Guardamos para obtener su ID
+                id_categoria = categoria.ID_Categoria
+
+            # 5. Crear el registro del libro
+            nuevo_libro = Libro(
+                Titulo=titulo,
+                Autor=autor,
+                ID_Categoria=id_categoria,
+                Sinopsis=tema,
+                Copias_Totales=1,       # Asignamos 1 por defecto al importarlo
+                Copias_Disponibles=1    # Asignamos 1 por defecto al importarlo
+            )
+            db.session.add(nuevo_libro)
+        
+        # 6. Guardar todos los libros nuevos en la base de datos
+        db.session.commit()
+        
+        # Redirigir de vuelta al panel de libros
+        return redirect('/admin-libros.html')
+    else:
+        return "Por favor sube un archivo con extensión .csv", 400
+    
+@app.route("/admin/importar-excel", methods=['POST'])
+def importar_excel():
+    if 'archivo_excel' not in request.files:
+        return "No se envió ningún archivo", 400
+    
+    file = request.files['archivo_excel']
+    if file.filename == '':
+        return "No se seleccionó ningún archivo", 400
+
+    if file and (file.filename.endswith('.xlsx') or file.filename.endswith('.xls')):
+        try:
+            df = pd.read_excel(file)
+            
+            for index, row in df.iterrows():
+                titulo = str(row.get('NOMBRE', '')).strip()
+                autor = str(row.get('AUTOR', '')).strip()
+                materia = str(row.get('MATERIA', '')).strip()
+                tema = str(row.get('TEMA', '')).strip()
+                
+                if titulo == 'nan' or not titulo:
+                    continue 
+                
+                if autor == 'nan': autor = 'Desconocido'
+                if tema == 'nan': tema = ''
+
+                id_categoria = None
+                if materia and materia != 'nan':
+                    categoria = Categoria.query.filter_by(Nombre_Categoria=materia).first()
+                    if not categoria:
+                        categoria = Categoria(Nombre_Categoria=materia)
+                        db.session.add(categoria)
+                        db.session.commit()
+                    id_categoria = categoria.ID_Categoria
+
+                # --- SOLUCIÓN: Generar un código único para evitar el error del ISBN ---
+                codigo_unico = f"UNDAC-{uuid.uuid4().hex[:8].upper()}"
+
+                nuevo_libro = Libro(
+                    Titulo=titulo,
+                    Autor=autor,
+                    ISBN=codigo_unico,  # <--- Insertamos el código único aquí
+                    ID_Categoria=id_categoria,
+                    Sinopsis=tema,
+                    Copias_Totales=1,       
+                    Copias_Disponibles=1    
+                )
+                db.session.add(nuevo_libro)
+            
+            db.session.commit()
+            return redirect('/admin-libros.html')
+            
+        except Exception as e:
+            # Si hay un error, deshacemos los cambios a medias para evitar corromper la BD
+            db.session.rollback() 
+            return f"Ocurrió un error al leer el Excel: {str(e)}", 500
+    else:
+        return "Por favor sube un archivo con extensión .xlsx o .xls", 400
 
 @app.route("/videoteca.html")
 def videoteca():
@@ -118,17 +247,9 @@ def reglamento():
 def admin_dashboard():
     return render_template("admin-dashboard.html")
 
-@app.route("/admin-libros.html")
-def admin_libros():
-    return render_template("admin-libros.html")
-
 @app.route("/admin-login.html")
 def admin_login():
     return render_template("admin-login.html")
-
-@app.route("/libro-detalle.html")
-def libro_detalle():
-    return render_template("libro-detalle.html")
 
 if __name__ == "__main__":
     # Crea las tablas si no existen en la base de datos PW_BIBLIOTECA

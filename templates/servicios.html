@@ -1,158 +1,117 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios | Sistema de Bibliotecas UNDAC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
-    <style>
-        .service-detail-card {
-            background: white;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            padding: 2rem;
-            transition: var(--transition);
-            border-top: 4px solid transparent;
-            height: 100%;
-        }
-        .service-detail-card:hover {
-            box-shadow: var(--shadow-md);
-            border-top-color: var(--primary);
-            transform: translateY(-5px);
-        }
-        .service-icon-large {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-        .service-list {
-            margin-top: 1rem;
-            color: var(--gray-500);
-            font-size: 0.95rem;
-        }
-        .service-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-        .service-list i {
-            color: var(--secondary);
-            margin-top: 0.25rem;
-        }
-    </style>
-</head>
+{% block title %}Servicios | Sistema de Bibliotecas UNDAC{% endblock %}
 
-<body>
-    <header class="navbar">
-        <div class="container navbar-container">
-            <div class="logo">
-                <a href="/" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
-                    <h2>Biblioteca <span>UNDAC</span></h2>
-                </a>
-            </div>
-            <nav class="nav-links">
-                <a href="/">Inicio</a>
-                <a href="/catalogo.html">Catálogo</a>
-                <a href="http://repositorio.undac.edu.pe/" target="_blank">Repositorio</a>
-                <a href="/videoteca.html">Videoteca</a>
-                <a href="/servicios.html">Servicios</a>
-                <a href="/reglamento.html">Reglamento</a>
-                <a href="/nosotros.html">Nosotros</a>
-            </nav>
+{% block content %}
+<style>
+    .service-detail-card {
+        background: white;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        padding: 2rem;
+        transition: var(--transition);
+        border-top: 4px solid transparent;
+        height: 100%;
+    }
+    .service-detail-card:hover {
+        box-shadow: var(--shadow-md);
+        border-top-color: var(--primary);
+        transform: translateY(-5px);
+    }
+    .service-icon-large {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+    }
+    .service-list {
+        margin-top: 1rem;
+        color: var(--gray-500);
+        font-size: 0.95rem;
+    }
+    .service-list li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+    .service-list i {
+        color: var(--secondary);
+        margin-top: 0.25rem;
+    }
+</style>
 
-            <div class="nav-actions">
-                <a href="admin-login.html" class="btn btn-outline">Intranet</a>
-            </div>
+<section class="page-header" style="background: linear-gradient(to right, #0F172A, #3B82F6);">
+    <div class="container" data-aos="fade-up">
+        <h1>Servicios de la Biblioteca</h1>
+        <p>Conoce todo lo que la DIUNSIBI tiene para apoyar tu desarrollo académico e investigativo.</p>
+    </div>
+</section>
+
+<section class="container" style="padding: 4rem 1.5rem;">
+    <div class="grid-3" style="gap: 2rem;">
+        <div class="service-detail-card" data-aos="fade-up" data-aos-delay="100">
+            <i class="fas fa-book-reader service-icon-large"></i>
+            <h3>Préstamo de Libros</h3>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Accede a nuestra amplia colección bibliográfica física.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> <strong>En Sala:</strong> Hasta 5 libros a la vez.</li>
+                <li><i class="fas fa-check"></i> <strong>A Domicilio (Alumnos/Docentes):</strong> Hasta 2 ejemplares por 3 días calendario.</li>
+                <li><i class="fas fa-check"></i> <strong>Alta Demanda:</strong> Préstamo a partir de las 9:00 p.m. Devolución al día siguiente (8:00 - 8:10 a.m.)</li>
+            </ul>
         </div>
-    </header>
 
-    <section class="page-header" style="background: linear-gradient(to right, #0F172A, #3B82F6);">
-        <div class="container" data-aos="fade-up">
-            <h1>Servicios de la Biblioteca</h1>
-            <p>Conoce todo lo que la DIUNSIBI tiene para apoyar tu desarrollo académico e investigativo.</p>
+        <div class="service-detail-card" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-users service-icon-large"></i>
+            <h3>Salas Polivalentes</h3>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Espacios diseñados para el estudio y trabajo grupal.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Tiempo máximo de uso: 2 horas (extensibles si no hay reservas).</li>
+                <li><i class="fas fa-check"></i> Requiere dejar el carné de lector DIUNSIBI.</li>
+                <li><i class="fas fa-check"></i> Docentes pueden reservar con 24h de anticipación para sustentaciones o entrevistas.</li>
+            </ul>
         </div>
-    </section>
 
-    <section class="container" style="padding: 4rem 1.5rem;">
-        <div class="grid-3" style="gap: 2rem;">
-            
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-book-reader service-icon-large"></i>
-                <h3>Préstamo de Libros</h3>
-                <p style="color: var(--gray-500); margin-top: 0.5rem;">Accede a nuestra amplia colección bibliográfica física.</p>
-                <ul class="service-list">
-                    <li><i class="fas fa-check"></i> <strong>En Sala:</strong> Hasta 5 libros a la vez.</li>
-                    <li><i class="fas fa-check"></i> <strong>A Domicilio (Alumnos/Docentes):</strong> Hasta 2 ejemplares por 3 días calendario.</li>
-                    <li><i class="fas fa-check"></i> <strong>Alta Demanda:</strong> Préstamo a partir de las 9:00 p.m. Devolución al día siguiente (8:00 - 8:10 a.m.)</li>
-                </ul>
-            </div>
-
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-users service-icon-large"></i>
-                <h3>Salas Polivalentes</h3>
-                <p style="color: var(--gray-500); margin-top: 0.5rem;">Espacios diseñados para el estudio y trabajo grupal.</p>
-                <ul class="service-list">
-                    <li><i class="fas fa-check"></i> Tiempo máximo de uso: 2 horas (extensibles si no hay reservas).</li>
-                    <li><i class="fas fa-check"></i> Requiere dejar el carné de lector DIUNSIBI.</li>
-                    <li><i class="fas fa-check"></i> Docentes pueden reservar con 24h de anticipación para sustentaciones o entrevistas.</li>
-                </ul>
-            </div>
-
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-print service-icon-large"></i>
-                <h3>Servicio de Reprografía</h3>
-                <p style="color: var(--gray-500); margin-top: 0.5rem;">Fotocopiado con fines estrictamente académicos (Ley 822).</p>
-                <ul class="service-list">
-                    <li><i class="fas fa-check"></i> <strong>Libros:</strong> Máximo hasta 2 capítulos.</li>
-                    <li><i class="fas fa-check"></i> <strong>Revistas:</strong> Hasta 3 artículos por fascículo.</li>
-                    <li><i class="fas fa-check"></i> <strong>Tesis (Restringido):</strong> Solo resumen, introducción, conclusiones, bibliografía y anexos.</li>
-                </ul>
-            </div>
-
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="400">
-                <i class="fas fa-desktop service-icon-large"></i>
-                <h3>Equipos y Base de Datos</h3>
-                <p style="color: var(--gray-500); margin-top: 0.5rem;">Acceso a internet y catálogos virtuales.</p>
-                <ul class="service-list">
-                    <li><i class="fas fa-check"></i> Tiempo máximo de uso en sala: 1 hora.</li>
-                    <li><i class="fas fa-check"></i> Acceso al repositorio institucional y revistas científicas.</li>
-                    <li><i class="fas fa-check"></i> Acceso a Biblioteca Virtual (eLibro).</li>
-                </ul>
-            </div>
-
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="500">
-                <i class="fas fa-chalkboard-teacher service-icon-large"></i>
-                <h3>Formación de Usuarios</h3>
-                <p style="color: var(--gray-500); margin-top: 0.5rem;">Programa de Alfabetización Informacional (ALFIN).</p>
-                <ul class="service-list">
-                    <li><i class="fas fa-check"></i> Aprende a buscar y recuperar información científica.</li>
-                    <li><i class="fas fa-check"></i> Sesiones de 2 horas programadas todo el año.</li>
-                    <li><i class="fas fa-check"></i> Inscripciones vía sistema KOHA o presencial.</li>
-                </ul>
-            </div>
-
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="600">
-                <i class="fas fa-laptop-house service-icon-large"></i>
-                <h3>Préstamo Digital</h3>
-                <p style="color: var(--gray-500); margin-top: 0.5rem;">Si estás fuera de tu sede, te acercamos la información.</p>
-                <ul class="service-list">
-                    <li><i class="fas fa-check"></i> Solicita capítulos específicos de libros físicos vía correo electrónico.</li>
-                    <li><i class="fas fa-check"></i> Se remiten en formato digital respetando los derechos de autor.</li>
-                </ul>
-            </div>
-
+        <div class="service-detail-card" data-aos="fade-up" data-aos-delay="300">
+            <i class="fas fa-print service-icon-large"></i>
+            <h3>Servicio de Reprografía</h3>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Fotocopiado con fines estrictamente académicos (Ley 822).</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> <strong>Libros:</strong> Máximo hasta 2 capítulos.</li>
+                <li><i class="fas fa-check"></i> <strong>Revistas:</strong> Hasta 3 artículos por fascículo.</li>
+                <li><i class="fas fa-check"></i> <strong>Tesis (Restringido):</strong> Solo resumen, introducción, conclusiones, bibliografía y anexos.</li>
+            </ul>
         </div>
-    </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true });
-    </script>
-</body>
-</html>
+        <div class="service-detail-card" data-aos="fade-up" data-aos-delay="400">
+            <i class="fas fa-desktop service-icon-large"></i>
+            <h3>Equipos y Base de Datos</h3>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Acceso a internet y catálogos virtuales.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Tiempo máximo de uso en sala: 1 hora.</li>
+                <li><i class="fas fa-check"></i> Acceso al repositorio institucional y revistas científicas.</li>
+                <li><i class="fas fa-check"></i> Acceso a Biblioteca Virtual (eLibro).</li>
+            </ul>
+        </div>
+
+        <div class="service-detail-card" data-aos="fade-up" data-aos-delay="500">
+            <i class="fas fa-chalkboard-teacher service-icon-large"></i>
+            <h3>Formación de Usuarios</h3>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Programa de Alfabetización Informacional (ALFIN).</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Aprende a buscar y recuperar información científica.</li>
+                <li><i class="fas fa-check"></i> Sesiones de 2 horas programadas todo el año.</li>
+                <li><i class="fas fa-check"></i> Inscripciones vía sistema KOHA o presencial.</li>
+            </ul>
+        </div>
+
+        <div class="service-detail-card" data-aos="fade-up" data-aos-delay="600">
+            <i class="fas fa-laptop-house service-icon-large"></i>
+            <h3>Préstamo Digital</h3>
+            <p style="color: var(--gray-500); margin-top: 0.5rem;">Si estás fuera de tu sede, te acercamos la información.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Solicita capítulos específicos de libros físicos vía correo electrónico.</li>
+                <li><i class="fas fa-check"></i> Se remiten en formato digital respetando los derechos de autor.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
