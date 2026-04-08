@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Estructuras de Datos y Algoritmos en Python | Biblioteca UNDAC{% endblock %}
+{% block title %}{{ libro.Titulo }} | Biblioteca UNDAC{% endblock %}
 
 {% block content %}
 <div class="breadcrumb">
@@ -18,16 +18,6 @@
             <div class="book-sticky-sidebar">
                 <div class="book-cover-panel">
                     <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="Portada de {{ libro.Titulo }}">
-                    
-                    {% if libro.Copias_Disponibles > 0 %}
-                        <span class="book-status" style="background: var(--secondary);"><i class="fas fa-check-circle"></i> {{ libro.Copias_Disponibles }} Copias Disponibles</span>
-                    {% else %}
-                        <span class="book-status" style="background: #ef4444; color: white;"><i class="fas fa-times-circle"></i> Agotado temporalmente</span>
-                    {% endif %}
-
-                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
-                        <button class="btn btn-primary w-full" {% if libro.Copias_Disponibles == 0 %}disabled{% endif %}><i class="fas fa-bookmark"></i> Reservar este libro</button>
-                    </div>
                 </div>
             </div>
 
@@ -44,17 +34,11 @@
                 <div class="book-info-panel">
                     <h3>Detalles del Libro</h3>
                     <div class="book-details-grid">
-                        <div class="book-details-label">ISBN:</div>
-                        <div>{{ libro.ISBN or 'N/A' }}</div>
-
                         <div class="book-details-label">Año de Edición:</div>
                         <div>{{ libro.Anio_Edicion or 'N/A' }}</div>
 
-                        <div class="book-details-label">Ubicación Física:</div>
+                        <div class="book-details-label">Ubicación Física (Local):</div>
                         <div>{{ libro.Ubicacion_Fisica or 'Consultar en recepción' }}</div>
-                        
-                        <div class="book-details-label">Stock Total:</div>
-                        <div>{{ libro.Copias_Totales }} copias en inventario</div>
                     </div>
                 </div>
             </div>

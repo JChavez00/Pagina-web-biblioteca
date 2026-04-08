@@ -68,7 +68,7 @@
                         <button class="btn btn-outline" onclick="openModal('importExcelModal')">
                             <i class="fas fa-file-excel"></i> Importar Excel
                         </button>
-                        <button class="btn btn-primary" onclick="openModal('addBookModal')">
+                        <button class="btn btn-primary" onclick="openAddBookModal()">
                             <i class="fas fa-plus"></i> Añadir Libro
                         </button>
                     </div>
@@ -82,7 +82,6 @@
                                 <th>Detalles del Libro</th>
                                 <th>Categoría</th>
                                 <th>Ubicación</th>
-                                <th>Stock</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -90,11 +89,11 @@
                             {% for libro in libros %}
                             <tr>
                                 <td>
-                                    <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80' }}" class="book-img-thumb" alt="Portada">
+                                    <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&w=100' }}" class="book-img-thumb" alt="Portada">
                                 </td>
                                 <td>
                                     <strong style="color: var(--dark); font-size: 1.05rem; display: block;">{{ libro.Titulo }}</strong>
-                                    <span style="font-size: 0.85rem; color: var(--gray-500);">{{ libro.Autor }} | ISBN: {{ libro.ISBN or 'N/A' }}</span>
+                                    <span style="font-size: 0.85rem; color: var(--gray-500);">{{ libro.Autor }}</span>
                                 </td>
                                 <td>
                                     <span style="background: var(--gray-100); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">
@@ -103,22 +102,26 @@
                                 </td>
                                 <td style="font-size: 0.9rem; color: var(--gray-500);">{{ libro.Ubicacion_Fisica }}</td>
                                 <td>
-                                    {% if libro.Copias_Disponibles == 0 %}
-                                        <strong style="color: #EF4444;">{{ libro.Copias_Disponibles }}</strong> / {{ libro.Copias_Totales }}
-                                    {% else %}
-                                        <strong>{{ libro.Copias_Disponibles }}</strong> / {{ libro.Copias_Totales }}
-                                    {% endif %}
-                                </td>
-                                <td>
                                     <div class="action-btns">
-                                        <button class="btn-icon btn-edit" title="Editar"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-icon btn-delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                        <button type="button" class="btn-icon btn-edit" title="Editar" 
+                                            data-id="{{ libro.ID_Libro }}"
+                                            data-titulo="{{ libro.Titulo }}"
+                                            data-autor="{{ libro.Autor }}"
+                                            data-ubicacion="{{ libro.Ubicacion_Fisica or '' }}"
+                                            data-sinopsis="{{ libro.Sinopsis or '' }}"
+                                            onclick="openEditBookModal(this)">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        
+                                        <form action="/admin/libros/eliminar/{{ libro.ID_Libro }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Eliminar este libro del catálogo?');">
+                                            <button type="submit" class="btn-icon btn-delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
                             {% else %}
                             <tr>
-                                <td colspan="6" style="text-align: center; padding: 2rem;">No hay libros en el inventario.</td>
+                                <td colspan="5" style="text-align: center; padding: 2rem;">No hay libros en el inventario.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -161,32 +164,34 @@
 
         <div class="modal-container">
             <div class="modal-header">
-                <h3>Añadir Nuevo Libro</h3>
+                <h3 id="bookModalTitle">Añadir Nuevo Libro</h3>
                 <button class="modal-close" onclick="closeModal('addBookModal')">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="addBookForm">
+                <form id="addBookForm" action="#">
                     <div style="margin-bottom: 1rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Título del Libro</label>
-                        <input type="text"
+                        <input type="text" name="titulo"
                             style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);"
                             placeholder="Ej. El Quijote">
                     </div>
                     <div style="margin-bottom: 1rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Autor</label>
-                        <input type="text"
+                        <input type="text" name="autor"
                             style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);"
                             placeholder="Ej. Miguel de Cervantes">
                     </div>
                     <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Categoría</label>
-                        <select
-                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
-                            <option>Ingeniería</option>
-                            <option>Medicina</option>
-                            <option>Ciencias Sociales</option>
-                            <option>Literatura</option>
-                        </select>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Ubicación</label>
+                        <input type="text" name="ubicacion"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);"
+                            placeholder="Ej. Estantería A5">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Sinopsis</label>
+                        <textarea name="sinopsis"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); resize: vertical; min-height: 80px;"
+                            placeholder="Breve descripción del libro..."></textarea>
                     </div>
                 </form>
             </div>
@@ -240,18 +245,50 @@
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
         }
-        function saveBook() {
-            // Animación de guardado
-            const btn = document.querySelector('.modal-footer .btn-primary');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
 
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                closeModal('addBookModal');
-                // Aquí iría un toast en el futuro de "Guardado con éxito"
-                alert('Libro guardado con éxito (Simulación)');
-            }, 1000);
+        function openEditBookModal(botonElement) {
+            // 1. Capturamos los datos almacenados en el botón (los atributos data-)
+            const id = botonElement.getAttribute('data-id');
+            const titulo = botonElement.getAttribute('data-titulo');
+            const autor = botonElement.getAttribute('data-autor');
+            const ubicacion = botonElement.getAttribute('data-ubicacion');
+            const sinopsis = botonElement.getAttribute('data-sinopsis');
+
+            // 2. Seleccionamos el formulario y el título del modal
+            const form = document.getElementById('addBookForm');
+            const title = document.getElementById('bookModalTitle'); // Recuerda añadir id="bookModalTitle" a tu <h3>
+            
+            // 3. Cambiamos la ruta y el título
+            title.innerText = "Editar Libro";
+            form.action = "/admin/libros/editar/" + id;
+            
+            // 4. Rellenamos los campos
+            form.querySelector('input[name="titulo"]').value = titulo;
+            form.querySelector('input[name="autor"]').value = autor;
+            form.querySelector('input[name="ubicacion"]').value = ubicacion;
+            form.querySelector('textarea[name="sinopsis"]').value = sinopsis;
+            
+            // 5. Abrimos el modal
+            openModal('addBookModal');
+        }
+
+        function openAddBookModal() {
+            const form = document.getElementById('addBookForm');
+            const title = document.getElementById('bookModalTitle');
+            
+            title.innerText = "Añadir Nuevo Libro";
+            form.action = "/admin/libros/crear";
+            form.reset();
+            openModal('addBookModal');
+        }
+
+        function saveBook() {
+            const form = document.getElementById('addBookForm');
+            if (form.action === "#") {
+                alert('Por favor, usa los botones apropiados para Crear o Editar.');
+                return;
+            }
+            form.submit();
         }
     </script>
 </body>

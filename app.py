@@ -51,7 +51,7 @@ class Categoria(db.Model):
 class Libro(db.Model):
     __tablename__ = 'Libros'
     ID_Libro = db.Column(db.Integer, primary_key=True)
-    Titulo = db.Column(db.String(200), nullable=False)
+    Titulo = db.Column(db.Text, nullable=False)
     Autor = db.Column(db.String(150))
     ISBN = db.Column(db.String(20), unique=True)
     ID_Categoria = db.Column(db.Integer, db.ForeignKey('Categorias_Libro.ID_Categoria'))
@@ -80,6 +80,27 @@ class Video(db.Model):
     URL_Video = db.Column(db.String(255), nullable=False)
     Miniatura_URL = db.Column(db.String(255))
     Duracion = db.Column(db.String(10))
+
+
+# --- NUEVAS RUTAS PARA LIBROS ---
+
+@app.route("/admin/libros/editar/<int:id>", methods=['POST'])
+def editar_libro(id):
+    libro = Libro.query.get_or_404(id)
+    libro.Titulo = request.form.get('titulo')
+    libro.Autor = request.form.get('autor')
+    libro.Ubicacion_Fisica = request.form.get('ubicacion')
+    libro.Sinopsis = request.form.get('sinopsis')
+    
+    db.session.commit()
+    return redirect('/admin-libros.html')
+
+@app.route("/admin/libros/eliminar/<int:id>", methods=['POST'])
+def eliminar_libro(id):
+    libro = Libro.query.get_or_404(id)
+    db.session.delete(libro)
+    db.session.commit()
+    return redirect('/admin-libros.html')
 
 # ==========================================
 # 3. RUTAS DE LA APLICACIÓN
@@ -195,12 +216,14 @@ def importar_excel():
                 autor = str(row.get('AUTOR', '')).strip()
                 materia = str(row.get('MATERIA', '')).strip()
                 tema = str(row.get('TEMA', '')).strip()
+                local = str(row.get('LOCAL', '')).strip()
                 
                 if titulo == 'nan' or not titulo:
                     continue 
                 
                 if autor == 'nan': autor = 'Desconocido'
                 if tema == 'nan': tema = ''
+                if local == 'nan': local = ''
 
                 id_categoria = None
                 if materia and materia != 'nan':
@@ -220,6 +243,7 @@ def importar_excel():
                     ISBN=codigo_unico,  # <--- Insertamos el código único aquí
                     ID_Categoria=id_categoria,
                     Sinopsis=tema,
+                    Ubicacion_Fisica=local,
                     Copias_Totales=1,       
                     Copias_Disponibles=1    
                 )
