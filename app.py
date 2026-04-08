@@ -66,10 +66,11 @@ class Publicacion(db.Model):
     __tablename__ = 'Publicaciones'
     ID_Publicacion = db.Column(db.Integer, primary_key=True)
     Titulo = db.Column(db.String(200), nullable=False)
-    Tipo_Publicacion = db.Column(db.String(50), nullable=False) 
+    Tipo_Publicacion = db.Column(db.String(50), nullable=False) # Ej: 'Noticia', 'Evento', 'Aviso'
     Contenido = db.Column(db.Text, nullable=False)
     Imagen_Portada_URL = db.Column(db.String(255))
     Fecha_Publicacion = db.Column(db.DateTime, default=datetime.utcnow)
+    Fecha_Evento = db.Column(db.DateTime, nullable=True) # <-- NUEVO CAMPO AÑADIDO
 
 class Video(db.Model):
     __tablename__ = 'Videos'
@@ -250,6 +251,45 @@ def admin_dashboard():
 @app.route("/admin-login.html")
 def admin_login():
     return render_template("admin-login.html")
+
+@app.route("/admin-noticias.html")
+def admin_noticias():
+    # Obtenemos todas las publicaciones ordenadas de la más reciente a la más antigua
+    publicaciones = Publicacion.query.order_by(Publicacion.Fecha_Publicacion.desc()).all()
+    return render_template("admin-noticias.html", publicaciones=publicaciones)
+
+@app.route("/admin/noticias/crear", methods=['POST'])
+def crear_noticia():
+    titulo = request.form.get('titulo')
+    tipo = request.form.get('tipo')
+    contenido = request.form.get('contenido')
+    imagen_url = request.form.get('imagen_url')
+    fecha_evento_str = request.form.get('fecha_evento')
+
+    # Convertir el string de fecha a objeto datetime si existe
+    fecha_evento = None
+    if fecha_evento_str:
+        fecha_evento = datetime.strptime(fecha_evento_str, '%Y-%m-%d')
+
+    nueva_publicacion = Publicacion(
+        Titulo=titulo,
+        Tipo_Publicacion=tipo,
+        Contenido=contenido,
+        Imagen_Portada_URL=imagen_url,
+        Fecha_Evento=fecha_evento
+    )
+    
+    db.session.add(nueva_publicacion)
+    db.session.commit()
+    
+    return redirect('/admin-noticias.html')
+
+@app.route("/admin/noticias/eliminar/<int:id>", methods=['POST'])
+def eliminar_noticia(id):
+    publicacion = Publicacion.query.get_or_404(id)
+    db.session.delete(publicacion)
+    db.session.commit()
+    return redirect('/admin-noticias.html')
 
 if __name__ == "__main__":
     # Crea las tablas si no existen en la base de datos PW_BIBLIOTECA

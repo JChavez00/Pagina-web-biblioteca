@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Noticias | Dashboard UNDAC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        
+        <aside class="admin-sidebar">
+            <div class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                <div>
+                    <h2 style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
+                    <p style="font-size: 0.8rem; color: var(--gray-500);">Panel Administrativo</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <a href="admin-dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="admin-libros.html"><i class="fas fa-book"></i> Catálogo de Libros</a>
+                <a href="#"><i class="fas fa-users"></i> Usuarios</a>
+                <a href="admin-noticias.html" class="active"><i class="fas fa-newspaper"></i> Noticias y Eventos</a>
+                <a href="#"><i class="fas fa-chart-bar"></i> Reportes</a>
+                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Noticias y Eventos</h1>
+                <p style="color: var(--gray-500);">Gestiona las publicaciones que aparecen en la página de inicio (Sección similar a USIL).</p>
+            </div>
+
+            <div class="admin-panel">
+                <div class="panel-header-actions">
+                    <div class="search-admin">
+                        <input type="text" placeholder="Buscar publicación...">
+                        <button class="btn btn-primary" style="padding: 0.75rem 1rem;"><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="btn btn-primary" onclick="openModal('addNewsModal')">
+                        <i class="fas fa-plus"></i> Nueva Publicación
+                    </button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Imagen</th>
+                                <th>Título y Contenido</th>
+                                <th>Tipo</th>
+                                <th>Fechas</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pub in publicaciones %}
+                            <tr>
+                                <td>
+                                    <div style="width: 60px; height: 60px; background-image: url('{{ pub.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&w=100' }}'); background-size: cover; background-position: center; border-radius: 4px;"></div>
+                                </td>
+                                <td>
+                                    <strong style="color: var(--dark); font-size: 1.05rem; display: block;">{{ pub.Titulo }}</strong>
+                                    <span style="font-size: 0.85rem; color: var(--gray-500);">{{ pub.Contenido[:60] }}...</span>
+                                </td>
+                                <td>
+                                    <span class="status-badge" style="background: var(--gray-200); color: var(--dark);">{{ pub.Tipo_Publicacion }}</span>
+                                </td>
+                                <td>
+                                    <p style="font-size: 0.85rem; margin:0;"><strong>Creado:</strong> {{ pub.Fecha_Publicacion.strftime('%d/%m/%Y') }}</p>
+                                    {% if pub.Fecha_Evento %}
+                                    <p style="font-size: 0.85rem; color: var(--primary); margin:0;"><strong>Evento:</strong> {{ pub.Fecha_Evento.strftime('%d/%m/%Y') }}</p>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn-icon btn-edit"><i class="fas fa-pen"></i></button>
+                                        <form action="/admin/noticias/eliminar/{{ pub.ID_Publicacion }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta publicación?');">
+                                            <button type="submit" class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" style="text-align: center; padding: 2rem;">No hay publicaciones registradas.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="addNewsModal">
+        <div class="modal-container" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Crear Nueva Publicación</h3>
+                <button class="modal-close" onclick="closeModal('addNewsModal')">&times;</button>
+            </div>
+            <form action="/admin/noticias/crear" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Título</label>
+                        <input type="text" name="titulo" class="form-control" required placeholder="Ej. Nuevo Taller de Base de Datos">
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Publicación</label>
+                            <select name="tipo" class="form-control" required>
+                                <option value="Noticia">Noticia</option>
+                                <option value="Evento">Evento / Taller</option>
+                                <option value="Aviso">Aviso Importante</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Fecha del Evento (Opcional)</label>
+                            <input type="date" name="fecha_evento" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL de la Imagen de Portada</label>
+                        <input type="url" name="imagen_url" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contenido / Resumen</label>
+                        <textarea name="contenido" class="form-control" rows="4" required placeholder="Escribe el cuerpo de la noticia aquí..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('addNewsModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+    </script>
+</body>
+</html>
