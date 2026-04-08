@@ -3,157 +3,45 @@
 {% block title %}Inicio | Sistema de Bibliotecas UNDAC{% endblock %}
 
 {% block content %}
-    <section class="hero" data-aos="fade-in">
+    <section class="hero" data-aos="fade-in" style="height: 60vh; min-height: 400px;">
         <div class="hero-overlay"></div>
-        <div class="container hero-content" data-aos="zoom-in" data-aos-delay="200">
+        <div class="container hero-content" data-aos="zoom-in" data-aos-delay="200" style="text-align: center;">
             <h1>Descubre el conocimiento infinito</h1>
-            <p>Accede a miles de recursos académicos, libros, revistas y bases de datos exclusivas de la Universidad
-                Nacional Daniel Alcides Carrión.</p>
-
-            <div class="search-box">
-                <div class="search-tabs">
-                    <button class="active">Todo</button>
-                    <button>Catálogo</button>
-                    <button>Repositorio</button>
-                    <button>Revistas</button>
-                </div>
-                <div class="search-input-container">
-                    <input type="text" placeholder="Buscar libros, artículos, tesis y más...">
-                    <button class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
-                </div>
-            </div>
+            <p style="margin: 0 auto;">Accede a miles de recursos académicos, libros físicos y bases de datos exclusivas de la Universidad Nacional Daniel Alcides Carrión.</p>
         </div>
     </section>
 
-    <section class="quick-links container">
+    <section class="news container" style="padding: 5rem 0;">
         <div class="section-header" data-aos="fade-up">
-            <h2>Colecciones Destacadas</h2>
-            <div class="title-line"></div>
-            <p>Explora nuestras áreas más consultadas</p>
-        </div>
-
-        <div class="swiper-container mySwiper" data-aos="fade-up" data-aos-delay="200">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <a href="catalogo.html" class="quick-card" style="width: 100%;">
-                        <div class="icon-wrapper"><i class="fas fa-book-open"></i></div>
-                        <h3>Catálogo en Línea</h3>
-                        <p>Encuentra libros impresos disponibles en nuestras sedes.</p>
-                    </a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="http://repositorio.undac.edu.pe/" target="_blank" class="quick-card" style="width: 100%;">
-                        <div class="icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
-                        <h3>Repositorio</h3>
-                        <p>Tesis y trabajos de investigación UNDAC.</p>
-                    </a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="https://elibro.net/es/lc/undac/login_usuario/" target="_blank" class="quick-card"
-                        style="width: 100%;">
-                        <div class="icon-wrapper"><i class="fas fa-database"></i></div>
-                        <h3>Bases de Datos</h3>
-                        <p>Acceso a recursos electrónicos y revistas científicas.</p>
-                    </a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="quick-card" style="width: 100%;">
-                        <div class="icon-wrapper"><i class="fas fa-laptop-code"></i></div>
-                        <h3>Biblioteca Virtual</h3>
-                        <p>Plataformas de libros electrónicos disponibles 24/7.</p>
-                    </a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="quick-card" style="width: 100%;">
-                        <div class="icon-wrapper"><i class="fas fa-microscope"></i></div>
-                        <h3>Investigación</h3>
-                        <p>Revistas y papers exclusivos para docentes.</p>
-                    </a>
-                </div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
-
-    <section class="services bg-light">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Nuestros Servicios</h2>
-                <div class="title-line"></div>
-                <p>Te acompañamos en tu proceso de aprendizaje e investigación</p>
-            </div>
-            <div class="grid-3">
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Asesorías">
-                    <div class="service-content">
-                        <h3>Asesorías Personalizadas</h3>
-                        <p>Reserva una asesoría y recibe el apoyo de un bibliotecólogo especializado en tu área
-                            temática.</p>
-                        <a href="#" class="btn-link">Saber más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Turnitin">
-                    <div class="service-content">
-                        <h3>Uso de Turnitin: Filtros y Reportes</h3>
-                        <p>Servicio de revisión de similitud en trabajos académicos y de investigación para docentes y
-                            estudiantes.</p>
-                        <a href="#" class="btn-link">Saber más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Workshops">
-                    <div class="service-content">
-                        <h3>Capacitaciones y Workshops</h3>
-                        <p>Dirigidos a toda la comunidad universitaria para el manejo de base de datos, APA y recursos.
-                        </p>
-                        <a href="#" class="btn-link">Saber más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="news container">
-        <div class="section-header">
             <h2>Noticias y Eventos</h2>
             <div class="title-line"></div>
-            <p>Entérate de los últimos acontecimientos en el Sistema de Bibliotecas UNDAC</p>
+            <p>Entérate de los últimos acontecimientos en la DIUNSIBI</p>
         </div>
         
         <div class="grid-2">
             {% if principal %}
             <div class="news-main" data-aos="fade-right">
-                <div class="news-img" style="background-image: url('{{ principal.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' }}');">
+                <div class="news-img" style="background-image: url('{{ principal.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&w=1000' }}');">
                 </div>
                 <div class="news-content">
                     <span class="badge">{{ principal.Tipo_Publicacion }}</span>
                     <h3>{{ principal.Titulo }}</h3>
-                    <p>{{ principal.Contenido[:150] }}...</p>
+                    <p>{{ principal.Contenido[:120] }}...</p>
                     <p class="date"><i class="far fa-calendar-alt"></i> 
                         {% if principal.Fecha_Evento %}
-                            Evento programado para: {{ principal.Fecha_Evento.strftime('%d/%m/%Y') }}
+                            Evento: {{ principal.Fecha_Evento.strftime('%d/%m/%Y') }}
                         {% else %}
                             Publicado: {{ principal.Fecha_Publicacion.strftime('%d/%m/%Y') }}
                         {% endif %}
                     </p>
                 </div>
             </div>
-            {% else %}
-            <div class="news-main" style="padding: 2rem; background: white; text-align: center; border-radius: 8px;">
-                <p>No hay noticias destacadas por el momento.</p>
-            </div>
             {% endif %}
 
             <div class="news-list" data-aos="fade-left">
                 {% for noticia in noticias %}
-                <a href="#" class="news-item">
-                    <div class="news-item-img" style="background-image: url('{{ noticia.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }}');">
+                <a href="/noticias.html" class="news-item">
+                    <div class="news-item-img" style="background-image: url('{{ noticia.Imagen_Portada_URL or 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&w=500' }}');">
                     </div>
                     <div class="news-item-content">
                         <span class="badge badge-outline">{{ noticia.Tipo_Publicacion }}</span>
@@ -161,17 +49,130 @@
                         <p class="date">{{ noticia.Fecha_Publicacion.strftime('%d/%m/%Y') }}</p>
                     </div>
                 </a>
-                {% else %}
-                <div style="text-align: center; padding: 2rem; background: white; border-radius: 8px; box-shadow: var(--shadow-sm);">
-                    <p style="color: var(--gray-500);">Aún no se han publicado más noticias o eventos.</p>
-                </div>
                 {% endfor %}
                 
-                {% if principal %}
                 <div class="view-all">
-                    <button class="btn btn-outline w-full">Ver todas las publicaciones</button>
+                    <a href="/noticias.html" class="btn btn-outline w-full" style="display: block; text-align: center;">Ver todas las publicaciones</a>
                 </div>
-                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Novedades en el Catálogo</h2>
+                <div class="title-line"></div>
+                <p>Explora los ejemplares disponibles físicamente en la biblioteca</p>
+            </div>
+
+            <div class="grid-4">
+                {% for libro in libros %}
+                <div class="book-card" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+                    <a href="/libro-detalle/{{ libro.ID_Libro }}" style="display: block; position: relative;">
+                        <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&w=400' }}" alt="Portada">
+                        {% if libro.Copias_Disponibles > 0 %}
+                            <span class="book-badge-disponible">Disponible</span>
+                        {% else %}
+                            <span class="book-badge-prestado">Agotado</span>
+                        {% endif %}
+                    </a>
+                    <div class="book-card-content">
+                        <p class="book-card-category">{{ libro.categoria.Nombre_Categoria if libro.categoria else 'General' }}</p>
+                        <h3 class="book-card-title" style="font-size: 1rem;"><a href="/libro-detalle/{{ libro.ID_Libro }}">{{ libro.Titulo[:45] }}...</a></h3>
+                        <p class="book-card-author" style="font-size: 0.85rem;">{{ libro.Autor }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/catalogo.html" class="btn btn-primary">Ir al Catálogo Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 5rem 0;">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Videoteca Académica</h2>
+            <div class="title-line"></div>
+            <p>Conferencias y tutoriales para tu formación profesional</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="video-card" data-aos="fade-up">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&w=600" alt="Video">
+                    <span class="video-duration">14:20</span>
+                    <div class="video-play-icon" style="background: var(--primary);"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <h3 style="color: var(--dark);">Búsquedas avanzadas en Scopus</h3>
+                    <p style="color: var(--gray-500);">Módulo de Alfabetización Informacional</p>
+                </div>
+            </div>
+            
+            <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1542621334-a2542d773431?ixlib=rb-4.0.3&w=600" alt="Video">
+                    <span class="video-duration">22:10</span>
+                    <div class="video-play-icon" style="background: var(--primary);"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <h3 style="color: var(--dark);">Uso de Turnitin: Filtros y Reportes</h3>
+                    <p style="color: var(--gray-500);">Herramientas para la Investigación</p>
+                </div>
+            </div>
+
+            <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1478147424044-4874c7717466?ixlib=rb-4.0.3&w=600" alt="Video">
+                    <span class="video-duration">55:00</span>
+                    <div class="video-play-icon" style="background: var(--primary);"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <h3 style="color: var(--dark);">Análisis de la obra de César Vallejo</h3>
+                    <p style="color: var(--gray-500);">Jueves Culturales UNDAC</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="/videoteca.html" class="btn btn-outline">Ver todos los videos</a>
+        </div>
+    </section>
+
+    <section class="bg-light" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Servicios Destacados</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="grid-3">
+                <div class="service-card" data-aos="fade-up" style="background: white; border: 1px solid var(--gray-200); box-shadow: none;">
+                    <div class="service-content" style="text-align: center; padding: 2.5rem 1.5rem;">
+                        <i class="fas fa-book-reader" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                        <h3>Préstamo a Domicilio</h3>
+                        <p style="font-size: 0.9rem;">Consulta hasta 2 ejemplares por 3 días calendario[cite: 147].</p>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100" style="background: white; border: 1px solid var(--gray-200); box-shadow: none;">
+                    <div class="service-content" style="text-align: center; padding: 2.5rem 1.5rem;">
+                        <i class="fas fa-users" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                        <h3>Salas Polivalentes</h3>
+                        <p style="font-size: 0.9rem;">Ambientes para estudio grupal por un tiempo máximo de 2 horas[cite: 179].</p>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200" style="background: white; border: 1px solid var(--gray-200); box-shadow: none;">
+                    <div class="service-content" style="text-align: center; padding: 2.5rem 1.5rem;">
+                        <i class="fas fa-desktop" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                        <h3>Biblioteca Virtual</h3>
+                        <p style="font-size: 0.9rem;">Acceso a bases de datos y repositorio institucional las 24 horas[cite: 165, 187].</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/servicios.html" class="btn-link">Ver detalle de todos los servicios <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>

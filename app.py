@@ -25,9 +25,9 @@ db_trusted = os.getenv('DB_TRUSTED_CONNECTION', 'yes')
 string_conexion = f"DRIVER={{{db_driver}}};SERVER={db_server};DATABASE={db_database};Trusted_Connection={db_trusted};"
 
 # Imprimimos la cadena en la consola para depurar (luego puedes borrar esta línea)
-print("\n--- INTENTANDO CONECTAR CON ---")
-print(string_conexion)
-print("-------------------------------\n")
+#print("\n--- INTENTANDO CONECTAR CON ---")
+#print(string_conexion)
+#print("-------------------------------\n")
 
 params_conexion = urllib.parse.quote_plus(string_conexion)
 CADENA_CONEXION = f"mssql+pyodbc:///?odbc_connect={params_conexion}"
@@ -89,12 +89,19 @@ def index():
     # 1. Obtener la publicación más reciente para el cuadro principal
     publicacion_principal = Publicacion.query.order_by(Publicacion.Fecha_Publicacion.desc()).first()
 
-    # 2. Obtener las siguientes 3 publicaciones (saltamos la primera con offset(1))
+    # 2. Obtener las siguientes 3 publicaciones
     otras_publicaciones = []
     if publicacion_principal:
         otras_publicaciones = Publicacion.query.order_by(Publicacion.Fecha_Publicacion.desc()).offset(1).limit(3).all()
 
-    return render_template("index.html", principal=publicacion_principal, noticias=otras_publicaciones)
+    # 3. NUEVO: Obtener los últimos 4 libros agregados al catálogo
+    ultimos_libros = Libro.query.order_by(Libro.ID_Libro.desc()).limit(4).all()
+
+    # Pasamos también los libros a la plantilla
+    return render_template("index.html", 
+                           principal=publicacion_principal, 
+                           noticias=otras_publicaciones,
+                           libros=ultimos_libros)
 
 @app.route("/catalogo.html")
 def catalogo():
@@ -236,6 +243,12 @@ def videoteca():
 def nosotros():
     return render_template("nosotros.html")
 
+@app.route("/noticias.html")
+def noticias_publicas():
+    # Obtenemos TODAS las publicaciones ordenadas de la más reciente a la más antigua
+    publicaciones = Publicacion.query.order_by(Publicacion.Fecha_Publicacion.desc()).all()
+    return render_template("noticias.html", publicaciones=publicaciones)
+
 @app.route("/servicios.html")
 def servicios():
     return render_template("servicios.html")
@@ -282,6 +295,24 @@ def crear_noticia():
     db.session.add(nueva_publicacion)
     db.session.commit()
     
+    return redirect('/admin-noticias.html')
+
+@app.route("/admin/noticias/editar/<int:id>", methods=['POST'])
+def editar_noticia(id):
+    publicacion = Publicacion.query.get_or_404(id)
+    
+    publicacion.Titulo = request.form.get('titulo')
+    publicacion.Tipo_Publicacion = request.form.get('tipo')
+    publicacion.Contenido = request.form.get('contenido')
+    publicacion.Imagen_Portada_URL = request.form.get('imagen_url')
+
+    fecha_evento_str = request.form.get('fecha_evento')
+    if fecha_evento_str:
+        publicacion.Fecha_Evento = datetime.strptime(fecha_evento_str, '%Y-%m-%d')
+    else:
+        publicacion.Fecha_Evento = None
+
+    db.session.commit()
     return redirect('/admin-noticias.html')
 
 @app.route("/admin/noticias/eliminar/<int:id>", methods=['POST'])

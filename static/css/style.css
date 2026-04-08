@@ -182,16 +182,11 @@ section {
    HEADER & NAVBAR
    ========================================= */
 .navbar {
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  position: fixed;
-  top: 0;
-  left: 0;
+  background-color: rgba(255, 255, 255, 0.95); /* Color un poco más sólido */
+  position: relative; /* <-- CAMBIO PRINCIPAL */
   width: 100%;
   z-index: 1000;
   box-shadow: var(--shadow-sm);
-  transition: var(--transition);
 }
 
 .navbar-container {
@@ -267,6 +262,70 @@ section {
 }
 
 /* =========================================
+   MENÚ DESPLEGABLE (DROPDOWN)
+   ========================================= */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+.nav-dropdown .dropbtn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* Aparece justo debajo del menú */
+  left: 0;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  z-index: 1000;
+  border: 1px solid var(--gray-200);
+}
+
+.dropdown-content a {
+  color: var(--gray-700);
+  padding: 1rem 1.5rem;
+  display: flex !important;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.dropdown-content a::after {
+  display: none; /* Quitamos la línea de abajo que tienen los enlaces normales */
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--gray-100);
+  color: var(--primary) !important;
+  padding-left: 1.8rem; /* Pequeño efecto de movimiento al hacer hover */
+}
+
+/* Mostrar el menú al pasar el mouse */
+.nav-dropdown:hover .dropdown-content {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
    HERO SECTION
    ========================================= */
 .hero {
@@ -280,7 +339,6 @@ section {
   background-size: cover;
   background-attachment: fixed;
   margin-top: 0;
-  padding-top: 80px;
   /* Offset for fixed header */
 }
 
@@ -803,7 +861,7 @@ section {
 .page-header {
   background-color: var(--primary);
   color: white;
-  padding: 120px 0 60px;
+  padding: 60px 0;
   text-align: center;
 }
 
@@ -991,7 +1049,7 @@ section {
 /* Book Detail */
 .breadcrumb {
   background: var(--light);
-  padding: 120px 0 20px;
+  padding: 40px 0 20px;
   border-bottom: 1px solid var(--gray-200);
   font-size: 0.9rem;
   color: var(--gray-500);
@@ -1172,10 +1230,10 @@ section {
   color: var(--secondary);
 }
 
-/* Ajuste del navbar cuando hay top-bar */
+/* Ajuste del navbar cuando hay top-bar 
 .navbar.has-top-bar {
   top: 38px;
-}
+}*/
 
 @media (max-width: 768px) {
   .top-bar .container {
@@ -1335,7 +1393,6 @@ section {
   align-items: center;
   justify-content: center;
   background: url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-  margin-top: 100px;
 }
 
 .videoteca-hero::before {
