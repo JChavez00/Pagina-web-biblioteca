@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | Dashboard UNDAC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <link rel="icon" href="../static/assets/img/logo-undac.png" type="image/png">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="../static/assets/img/logo-undac.png" alt="Logo UNDAC" style="height: 40px; width: auto;">
+                <div>
+                    <h2 style="margin-bottom: 0;">Biblioteca <span>UNDAC</span></h2>
+                    <p style="font-size: 0.8rem; color: var(--gray-500);">Panel Administrativo</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Resumen General</a>
+                <a href="admin-libros.html"><i class="fas fa-book"></i> Catálogo de Libros</a>
+                <a href="admin-noticias.html"><i class="fas fa-newspaper"></i> Noticias y Eventos</a>
+                <a href="admin-perfil.html" class="active"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+            </nav>
+            <div class="admin-user">
+                <div class="user-avatar">{{ admin.Nombres[0] if admin else 'A' }}</div>
+                <div>
+                    <p style="font-weight: 600; font-size: 0.9rem;">{{ admin.Nombres.split()[0] if admin else 'Admin Principal' }}</p>
+                    <a href="admin-login.html" style="color: var(--gray-500); font-size: 0.8rem; display: flex; align-items: center; gap: 0.25rem; margin-top: 0.25rem;"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Mi Perfil</h1>
+                <p style="color: var(--gray-500);">Visualiza tus datos y gestiona los accesos al sistema.</p>
+            </div>
+
+            {% if success == 'pass_cambiada' %}
+            <div style="background: #dcfce7; color: #166534; padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 2rem; border-left: 4px solid #16a34a;"><i class="fas fa-check-circle"></i> Contraseña actualizada correctamente.</div>
+            {% elif success == 'usuario_creado' %}
+            <div style="background: #dcfce7; color: #166534; padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 2rem; border-left: 4px solid #16a34a;"><i class="fas fa-user-plus"></i> Nuevo administrador creado exitosamente.</div>
+            {% elif error == 'pass_incorrecta' %}
+            <div style="background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 2rem; border-left: 4px solid #dc2626;"><i class="fas fa-exclamation-circle"></i> La contraseña actual ingresada es incorrecta.</div>
+            {% elif error == 'auth_fallida' %}
+            <div style="background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 2rem; border-left: 4px solid #dc2626;"><i class="fas fa-shield-alt"></i> Autorización fallida: Tu contraseña de administrador es incorrecta. No se creó el usuario.</div>
+            {% endif %}
+
+            <div class="admin-panel" style="max-width: 600px; margin: 0 auto; padding: 3rem 2rem; text-align: center;">
+                <div style="width: 100px; height: 100px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: bold; margin: 0 auto 1.5rem;">
+                    {{ admin.Nombres[0] if admin else 'A' }}
+                </div>
+                
+                <h2 style="font-size: 1.5rem; color: var(--dark); margin-bottom: 0.5rem;">{{ admin.Nombres if admin else 'No registrado' }}</h2>
+                
+                <span style="background: var(--gray-100); color: var(--gray-600); padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; display: inline-block; margin-bottom: 2.5rem;">
+                    <i class="fas fa-user-shield" style="margin-right: 0.25rem;"></i> {{ admin.Rol if admin else 'Administrador' }}
+                </span>
+
+                <div style="text-align: left; margin-bottom: 3rem; background: var(--gray-50); padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-200);">
+                    <label style="display: block; font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.25rem;">Correo Institucional</label>
+                    <p style="font-weight: 500; color: var(--dark); font-size: 1.05rem; margin: 0;">{{ admin.Correo_Institucional if admin else 'No registrado' }}</p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button class="btn btn-outline" onclick="openModal('changePassModal')">
+                        <i class="fas fa-key"></i> Cambiar Contraseña
+                    </button>
+                    <button class="btn btn-primary" onclick="openModal('createUserModal')">
+                        <i class="fas fa-user-plus"></i> Añadir Usuario
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="changePassModal">
+        <div class="modal-container" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Cambiar Mi Contraseña</h3>
+                <button class="modal-close" onclick="closeModal('changePassModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/perfil/cambiar-password" method="POST" id="formCambiarPass">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Contraseña Actual</label>
+                        <input type="password" name="password_actual" required placeholder="Ingresa tu contraseña actual" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Nueva Contraseña</label>
+                        <input type="password" name="nueva_password" id="newPass" required placeholder="Escribe la nueva contraseña" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Confirmar Nueva Contraseña</label>
+                        <input type="password" id="confirmPass" required placeholder="Repite la nueva contraseña" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none;">
+                        <p id="error-msg" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.5rem; display: none;">Las contraseñas no coinciden.</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full" style="padding: 0.75rem;"><i class="fas fa-save"></i> Guardar Nueva Contraseña</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="createUserModal">
+        <div class="modal-container" style="max-width: 550px;">
+            <div class="modal-header">
+                <h3>Añadir Nuevo Administrador</h3>
+                <button class="modal-close" onclick="closeModal('createUserModal')">&times;</button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                <form action="/admin/perfil/crear-usuario" method="POST">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Nombres Completos</label>
+                        <input type="text" name="nombres" required placeholder="Ej. Juan Pérez" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Correo Institucional</label>
+                        <input type="email" name="correo" required placeholder="ejemplo@undac.edu.pe" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Rol</label>
+                        <select name="rol" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none; background: white;">
+                            <option value="Administrador">Administrador General</option>
+                            <option value="Bibliotecario">Bibliotecario</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">Contraseña para el nuevo usuario</label>
+                        <input type="password" name="password_nuevo" required placeholder="Asigna una contraseña temporal" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); outline: none;">
+                    </div>
+
+                    <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <p style="font-size: 0.85rem; color: #b45309; margin-bottom: 0.75rem;"><i class="fas fa-shield-alt"></i> <strong>Autorización requerida:</strong> Ingresa TU contraseña actual para autorizar esta creación.</p>
+                        <input type="password" name="password_auth" required placeholder="Tu contraseña actual" style="width: 100%; padding: 0.75rem; border: 1px solid #fcd34d; border-radius: var(--radius-sm); outline: none;">
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; padding: 0.75rem; background: #16a34a; color: white;"><i class="fas fa-check"></i> Autorizar y Crear Usuario</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Validación de contraseñas nuevas
+        const formCambiarPass = document.getElementById('formCambiarPass');
+        const newPass = document.getElementById('newPass');
+        const confirmPass = document.getElementById('confirmPass');
+        const errorMsg = document.getElementById('error-msg');
+
+        formCambiarPass.addEventListener('submit', function(e) {
+            if (newPass.value !== confirmPass.value) {
+                e.preventDefault();
+                errorMsg.style.display = 'block';
+                confirmPass.style.borderColor = '#ef4444';
+            } else {
+                errorMsg.style.display = 'none';
+                confirmPass.style.borderColor = 'var(--gray-300)';
+            }
+        });
+    </script>
+</body>
+</html>

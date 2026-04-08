@@ -32,12 +32,10 @@
                 </div>
             </div>
             <nav class="admin-nav">
-                <a href="admin-dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Resumen General</a>
                 <a href="admin-libros.html" class="active"><i class="fas fa-book"></i> Catálogo de Libros</a>
-                <a href="#"><i class="fas fa-users"></i> Usuarios</a>
                 <a href="admin-noticias.html"><i class="fas fa-newspaper"></i> Noticias y Eventos</a>
-                <a href="#"><i class="fas fa-chart-bar"></i> Reportes</a>
-                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+                <a href="admin-perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
             </nav>
             <div class="admin-user">
                 <div class="user-avatar">A</div>
@@ -86,7 +84,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for libro in libros %}
+                            {% for libro in libros.items %}
                             <tr>
                                 <td>
                                     <img src="{{ libro.Portada_URL or 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&w=100' }}" class="book-img-thumb" alt="Portada">
@@ -130,13 +128,34 @@
 
                 <!-- Pagination -->
                 <div class="admin-pagination">
-                    <p>Mostrando 3 de 15,482 libros</p>
+                    <p>Mostrando página <strong>{{ libros.page }}</strong> de <strong>{{ libros.pages }}</strong> ({{ libros.total }} libros en total)</p>
+                    
                     <div class="admin-pagination-btns">
-                        <button class="btn btn-outline admin-btn-page" disabled>Anterior</button>
-                        <button class="btn btn-outline admin-btn-page active">1</button>
-                        <button class="btn btn-outline admin-btn-page">2</button>
-                        <button class="btn btn-outline admin-btn-page">3</button>
-                        <button class="btn btn-outline admin-btn-page">Siguiente</button>
+                        
+                        {% if libros.has_prev %}
+                            <a href="?page={{ libros.prev_num }}" class="btn btn-outline admin-btn-page">Anterior</a>
+                        {% else %}
+                            <button class="btn btn-outline admin-btn-page" disabled>Anterior</button>
+                        {% endif %}
+
+                        {% for page_num in libros.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                            {% if page_num %}
+                                {% if libros.page == page_num %}
+                                    <button class="btn btn-outline admin-btn-page active">{{ page_num }}</button>
+                                {% else %}
+                                    <a href="?page={{ page_num }}" class="btn btn-outline admin-btn-page">{{ page_num }}</a>
+                                {% endif %}
+                            {% else %}
+                                <span class="admin-btn-page" style="border: none; padding: 0.5rem; background: transparent;">...</span>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if libros.has_next %}
+                            <a href="?page={{ libros.next_num }}" class="btn btn-outline admin-btn-page">Siguiente</a>
+                        {% else %}
+                            <button class="btn btn-outline admin-btn-page" disabled>Siguiente</button>
+                        {% endif %}
+                        
                     </div>
                 </div>
 
@@ -147,20 +166,7 @@
     <!-- Modal: Añadir Libro -->
     <div class="modal-overlay" id="addBookModal">
 
-        <div class="panel-header-actions">
-            <div class="search-admin">
-                <input type="text" placeholder="Buscar por título, autor o ISBN...">
-                <button class="btn btn-primary" style="padding: 0.75rem 1rem;"><i class="fas fa-search"></i></button>
-            </div>
-            <div style="display: flex; gap: 0.5rem;">
-                <button class="btn btn-outline" onclick="openModal('importModal')">
-                    <i class="fas fa-file-excel"></i> Importar CSV
-                </button>
-                <button class="btn btn-primary" onclick="openModal('addBookModal')">
-                    <i class="fas fa-plus"></i> Añadir Libro
-                </button>
-            </div>
-        </div>
+        
 
         <div class="modal-container">
             <div class="modal-header">
@@ -168,7 +174,7 @@
                 <button class="modal-close" onclick="closeModal('addBookModal')">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="addBookForm" action="#">
+                <form id="addBookForm" action="#" method="POST">
                     <div style="margin-bottom: 1rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Título del Libro</label>
                         <input type="text" name="titulo"

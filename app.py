@@ -126,10 +126,14 @@ def index():
 
 @app.route("/catalogo.html")
 def catalogo():
-    # Obtenemos todos los libros de la base de datos
-    libros = Libro.query.all()
-    # Se los pasamos a la plantilla
-    return render_template("catalogo.html", libros=libros)
+    # 1. Obtenemos el número de página actual de la URL
+    page = request.args.get('page', 1, type=int)
+    
+    # 2. Paginamos de 15 en 15 (o los que quieras mostrar por página)
+    libros_paginados = Libro.query.order_by(Libro.ID_Libro.desc()).paginate(page=page, per_page=15, error_out=False)
+    
+    # 3. Se los pasamos a la plantilla
+    return render_template("catalogo.html", libros=libros_paginados)
 
 # Modificamos la ruta para que acepte un ID numérico
 @app.route("/libro-detalle/<int:id_libro>")
@@ -140,9 +144,14 @@ def libro_detalle(id_libro):
 
 @app.route("/admin-libros.html")
 def admin_libros():
-    # Para la tabla del administrador también necesitamos los libros
-    libros = Libro.query.all()
-    return render_template("admin-libros.html", libros=libros)
+    # 1. Obtenemos el número de página de la URL (si no hay, por defecto es la página 1)
+    page = request.args.get('page', 1, type=int)
+    
+    # 2. Paginamos los resultados de 15 en 15, ordenados por los más recientes
+    libros_paginados = Libro.query.order_by(Libro.ID_Libro.desc()).paginate(page=page, per_page=15, error_out=False)
+    
+    # 3. Enviamos el objeto paginado a la plantilla
+    return render_template("admin-libros.html", libros=libros_paginados)
 
 @app.route("/admin/importar-libros", methods=['POST'])
 def importar_libros():
@@ -263,6 +272,68 @@ def importar_excel():
 def videoteca():
     return render_template("videoteca.html")
 
+class UsuarioAdmin(db.Model):
+    __tablename__ = 'Usuarios_Admin'
+    ID_Usuario = db.Column(db.Integer, primary_key=True)
+    Nombres = db.Column(db.String(100), nullable=False)
+    Correo_Institucional = db.Column(db.String(100), nullable=False)
+    Password_Hash = db.Column(db.String(255), nullable=False)
+    Rol = db.Column(db.String(50))
+    Estado = db.Column(db.String(20))
+    Fecha_Creacion = db.Column(db.DateTime, default=datetime.utcnow)
+
+@app.route("/admin-perfil.html")
+def admin_perfil():
+    admin = UsuarioAdmin.query.first()
+    # Capturamos los mensajes de éxito o error de la URL
+    success = request.args.get('success')
+    error = request.args.get('error')
+    
+    return render_template("admin-perfil.html", admin=admin, success=success, error=error)
+
+@app.route("/admin/perfil/cambiar-password", methods=['POST'])
+def cambiar_password():
+    admin = UsuarioAdmin.query.first()
+    if admin:
+        password_actual = request.form.get('password_actual')
+        nueva_password = request.form.get('nueva_password')
+        
+        # 1. Verificamos que la contraseña actual sea la correcta
+        if admin.Password_Hash != password_actual:
+            return redirect('/admin-perfil.html?error=pass_incorrecta')
+            
+        # 2. Si es correcta, actualizamos
+        admin.Password_Hash = nueva_password
+        db.session.commit()
+        return redirect('/admin-perfil.html?success=pass_cambiada')
+        
+    return redirect('/admin-perfil.html')
+
+@app.route("/admin/perfil/crear-usuario", methods=['POST'])
+def crear_usuario():
+    admin_actual = UsuarioAdmin.query.first()
+    
+    # 1. Obtenemos la contraseña del admin actual para autorizar la acción
+    password_auth = request.form.get('password_auth')
+    
+    if admin_actual and admin_actual.Password_Hash != password_auth:
+        # Si la contraseña de confirmación está mal, cancelamos la creación
+        return redirect('/admin-perfil.html?error=auth_fallida')
+        
+    # 2. Si la contraseña es correcta, creamos el nuevo usuario
+    nuevo_admin = UsuarioAdmin(
+        Nombres=request.form.get('nombres'),
+        Correo_Institucional=request.form.get('correo'),
+        Password_Hash=request.form.get('password_nuevo'),
+        Rol=request.form.get('rol'),
+        Estado='Activo'
+    )
+    
+    db.session.add(nuevo_admin)
+    db.session.commit()
+    
+    return redirect('/admin-perfil.html?success=usuario_creado')
+
 @app.route("/nosotros.html")
 def nosotros():
     return render_template("nosotros.html")
@@ -283,7 +354,16 @@ def reglamento():
 
 @app.route("/admin-dashboard.html")
 def admin_dashboard():
-    return render_template("admin-dashboard.html")
+    # Contamos el total de registros en cada tabla
+    total_libros = Libro.query.count()
+    total_noticias = Publicacion.query.count()
+    total_videos = Video.query.count()
+    
+    # Enviamos los totales a la plantilla
+    return render_template("admin-dashboard.html", 
+                           total_libros=total_libros, 
+                           total_noticias=total_noticias, 
+                           total_videos=total_videos)
 
 @app.route("/admin-login.html")
 def admin_login():
